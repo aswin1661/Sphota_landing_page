@@ -51,6 +51,7 @@ export default function Home() {
                     background: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0, 0, 0, 1) 100%, black 100%)"
                 }}
             ></div>
+            
            
             <h1 className="fixed pt-[10vh] fixed berserker text-5xl">SPHOTA</h1>
             <h3 className="fixed text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
@@ -60,7 +61,7 @@ export default function Home() {
 </h3>
 
             {/* Play Button with Clip Animation */}
-            <button className="button mt-[55vh] fixed">
+            <button className="button mt-[55vh]">
                 R E J I S T E R
                 <div id="clip">
                     <div id="leftTop" className="corner"></div>
