@@ -12,7 +12,7 @@ export default function Home() {
             style={{ backgroundImage: "url('/images/home2.jpg')" }}
         >
             {/* Fixed watermark in top left */}
-            <div className="fixed top-4 left-4 z-20 opacity-95">
+            <div className="fixed top-4 left-4 z-20 opacity-85">
                 <Image src="/images/IEEE logo Full White.png" alt="Watermark" width={80} height={50} />
             </div>
 
@@ -48,7 +48,7 @@ export default function Home() {
             </nav>
             <div className="absolute inset-0 pointer-events-none opacity-90"
                 style={{
-                    background: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0, 0, 0, 1) 100%, black 100%)"
+                    background: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%, black 100%)"
                 }}
             ></div>
             
