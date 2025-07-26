@@ -1,7 +1,6 @@
 import Home from "./components/home";
 
-export default async function Page() {
-await new Promise((resolve) => setTimeout(resolve, 2500));
+export default function Page() {
   return (
     <div>
       <Home/>
