@@ -24,7 +24,7 @@ export default function Home() {
                     <Link href="/about" className="tahoma text-white hover:text-blue-300 transition">About</Link>
                     <Link href="/about" className="tahoma text-white hover:text-blue-300 transition">Sponsers</Link>
                     <Link href="/about" className="tahoma text-white hover:text-blue-300 transition">Timeline</Link>
-                    <Link href="/register" className="tahoma text-white hover:text-blue-300 transition">FAQ'S</Link>
+                    <Link href="/register" className="tahoma text-white hover:text-blue-300 transition">FAQ&apos;S</Link>
                 </div>
                 {/* Mobile Nav Button */}
                 <div className="md:hidden flex items-center justify-end w-full">
