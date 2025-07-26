@@ -9,10 +9,10 @@ export default function Home() {
     return(
         <div
             className="relative flex w-screen h-screen items-center justify-center bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/home.jpg')" }}
+            style={{ backgroundImage: "url('/images/home2.jpg')" }}
         >
             {/* Fixed watermark in top left */}
-            <div className="fixed top-4 left-4 z-20 opacity-80">
+            <div className="fixed top-4 left-4 z-20 opacity-95">
                 <Image src="/images/IEEE logo Full White.png" alt="Watermark" width={80} height={50} />
             </div>
 
