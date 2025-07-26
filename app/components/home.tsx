@@ -52,15 +52,15 @@ export default function Home() {
                 }}
             ></div>
            
-            <h1 className="fixed pt-[30vh] fixed berserker text-5xl">SPHOTA</h1>
-            <h3 className="fixed text-center pt-[50vh] tahoma text-white text-[1.3vh] lg:text-[2vh]">
+            <h1 className="fixed pt-[20vh] fixed berserker text-5xl">SPHOTA</h1>
+            <h3 className="fixed text-center pt-[40vh] tahoma text-white text-[1.3vh] lg:text-[2vh]">
   Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
   Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
   when an unknown printer
 </h3>
 
             {/* Play Button with Clip Animation */}
-            <button className="button mt-[70vh] fixed">
+            <button className="button mt-[65vh] fixed">
                 R E J I S T E R
                 <div id="clip">
                     <div id="leftTop" className="corner"></div>
