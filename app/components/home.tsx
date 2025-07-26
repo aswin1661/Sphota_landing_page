@@ -54,11 +54,11 @@ export default function Home() {
             
            
             <h1 className="absolute pt-[10vh] berserker text-5xl">SPHOTA</h1>
-            <h3 className="absolute text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
-  Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
-  Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
-  when an unknown printer
-</h3>
+                        <h3 className="absolute text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
+                            Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
+                            when an unknown printer
+                        </h3>
 
             {/* Play Button with Clip Animation */}
             <button className="button mt-[55vh]">
