@@ -53,7 +53,7 @@ export default function Home() {
             ></div>
            
             <h1 className="fixed pt-[20vh] fixed berserker text-5xl">SPHOTA</h1>
-            <h3 className="fixed text-center pt-[40vh] tahoma text-white text-[1.3vh] lg:text-[2vh]">
+            <h3 className="fixed text-center pt-[40vh] tahoma text-white text-[1.3vh] lg:text-[2vh] sm:text-[1.3vh]">
   Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
   Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
   when an unknown printer
