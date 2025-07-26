@@ -12,7 +12,7 @@ export default function Home() {
             style={{ backgroundImage: "url('/images/home2.jpg')" }}
         >
             {/* Fixed watermark in top left */}
-            <div className="fixed top-4 left-4 z-20 opacity-85">
+            <div className="absolute top-4 left-4 z-20 opacity-85">
                 <Image src="/images/IEEE logo Full White.png" alt="Watermark" width={80} height={50} />
             </div>
 
@@ -53,8 +53,8 @@ export default function Home() {
             ></div>
             
            
-            <h1 className="fixed pt-[10vh] fixed berserker text-5xl">SPHOTA</h1>
-            <h3 className="fixed text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
+            <h1 className="absolute pt-[10vh] fixed berserker text-5xl">SPHOTA</h1>
+            <h3 className="absolute text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
   Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
   Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
   when an unknown printer
