@@ -1,8 +1,6 @@
 export default function Page() {
   return (
-    <div>
-      <h1>Sphota</h1>
-      <p>Landing</p>
+    <div className="flex w-screen h-screen  bg-black">
     </div>
   );
 }
