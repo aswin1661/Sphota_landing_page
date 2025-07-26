@@ -51,10 +51,7 @@ export default function Home() {
                     background: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 60%, rgba(0, 0, 0, 1) 100%, black 100%)"
                 }}
             ></div>
-            {/* Centered Countdown Timer 
-                <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40">
-                <Countdown targetDate="2025-08-27T00:00:00" />
-                </div> */}
+           
             <h1 className="pt-[30vh] fixed berserker text-5xl">SPHOTA</h1>
             <h3 className="fixed text-center pt-[50vh] tahoma text-white text-[1.3vh]">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
