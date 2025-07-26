@@ -62,7 +62,7 @@ export default function Home() {
 
             {/* Play Button with Clip Animation */}
             <button className="button mt-[55vh]">
-                R E J I S T E R
+                R E G I S T E R
                 <div id="clip">
                     <div id="leftTop" className="corner"></div>
                     <div id="rightBottom" className="corner"></div>
