@@ -41,7 +41,7 @@ export default function Home() {
                             <Link href="/about" className="tahoma text-white hover:text-blue-300 transition" onClick={() => setMenuOpen(false)}>About</Link>
                             <Link href="/about" className="tahoma text-white hover:text-blue-300 transition" onClick={() => setMenuOpen(false)}>Sponsers</Link>
                             <Link href="/about" className="tahoma text-white hover:text-blue-300 transition" onClick={() => setMenuOpen(false)}>Timeline</Link>
-                            <Link href="/register" className="tahoma text-white hover:text-blue-300 transition" onClick={() => setMenuOpen(false)}>FAQ'S</Link>
+                            <Link href="/register" className="tahoma text-white hover:text-blue-300 transition">FAQ&apos;S</Link>
                         </span>
                     )}
                 </div>
