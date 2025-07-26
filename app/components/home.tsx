@@ -6,10 +6,17 @@ import { useEffect, useState } from "react";
 export default function Home() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
         const handlePageLoad = () => {
-            setIsLoading(false);
+            // Start fade out
+            setFadeOut(true);
+
+            // Wait for fade-out animation, then hide loader
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 800); // duration matches CSS transition time
         };
 
         if (document.readyState === "complete") {
@@ -22,26 +29,30 @@ export default function Home() {
 
     return (
         <>
+            {/* Loader */}
             {isLoading && (
-                <div className="fixed inset-0 z-[9999] bg-black flex items-center justify-center">
-                    {/* You can replace this with your own animated loader */}
+                <div
+                    className={`fixed inset-0 z-[9999] bg-black flex items-center justify-center transition-opacity duration-700 ease-in-out ${
+                        fadeOut ? "opacity-0 pointer-events-none" : "opacity-100"
+                    }`}
+                >
                     <p className="text-white text-xl animate-pulse">Loading...</p>
                 </div>
             )}
 
-            {/* Main Page Content */}
+            {/* Main Page */}
             <div
-                className={`relative flex w-screen h-screen items-center justify-center bg-cover bg-center transition-opacity duration-500 ${
-                    isLoading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                className={`relative flex w-screen h-screen items-center justify-center bg-cover bg-center transition-opacity duration-1000 ${
+                    isLoading ? "opacity-0 pointer-events-none" : "opacity-100"
                 }`}
                 style={{ backgroundImage: "url('/images/home2.jpg')" }}
             >
-                {/* Fixed watermark in top left */}
+                {/* Watermark */}
                 <div className="absolute top-4 left-4 z-20 opacity-85">
                     <Image src="/images/IEEE logo Full White.png" alt="Watermark" width={80} height={50} />
                 </div>
 
-                {/* Responsive Nav Bar */}
+                {/* Navbar */}
                 <nav className="absolute top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-3xl px-2 flex justify-center sm:justify-center">
                     <div className="hidden md:flex gap-10 px-8 py-4 rounded-full">
                         <Link href="/" className="tahoma text-white hover:text-blue-300 transition">Home</Link>
@@ -51,7 +62,7 @@ export default function Home() {
                         <Link href="/register" className="tahoma text-white hover:text-blue-300 transition">FAQ&apos;S</Link>
                     </div>
 
-                    {/* Mobile Nav Button */}
+                    {/* Mobile Menu */}
                     <div className="md:hidden flex items-center justify-end w-full">
                         <button
                             className="px-4 py-4 mr-[5vw] text-white text-[3vh]"
@@ -79,7 +90,7 @@ export default function Home() {
                     }}
                 ></div>
 
-                {/* Title & Subtitle */}
+                {/* Main Text */}
                 <h1 className="animated animatedFadeInUp fadeInUp absolute pt-[10vh] berserker text-5xl">SPHOTA</h1>
                 <h3 className="animated animatedFadeInUp fadeInUp absolute text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] sm:text-[1.3vh]">
                     Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
