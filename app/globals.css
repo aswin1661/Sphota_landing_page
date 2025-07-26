@@ -243,9 +243,9 @@
 }
 
 .animated {
-    animation-duration: 1s;
+    animation-duration: 1.5s;
     animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 1.5s;
     -webkit-animation-fill-mode: both
 }
 
