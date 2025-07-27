@@ -41,7 +41,7 @@ export default function About() {
       ></div>
 
       <div className="h-screen w-screen mt-10 flex flex-col items-center justify-center text-white">
-        <div className="h-screen w-screen absolute bg-black opacity-55 z-0"></div>
+        <div className="h-screen w-screen absolute bg-black opacity-45 z-0"></div>
 
         <h2
           className={`${

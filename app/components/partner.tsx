@@ -33,14 +33,14 @@ export default function Partners() {
   }, []);
 
   return (
-    <section className="relative h-screen w-screen overflow-hidden py-12">
+    <section className="relative  h-screen w-screen overflow-hidden py-12">
       {/* Blurred radial gradient background */}
       <div
         ref={sectionRef}
-        className={`relative flex w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
+        className={`relative flex w-screen h-full overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
-        style={{ backgroundImage: "url('/images/about.jpg')" }}
+        style={{ backgroundImage: "url('/images/partners.jpg')" }}
       >
          <div
         className="absolute inset-0 pointer-events-none opacity-100"
@@ -49,7 +49,7 @@ export default function Partners() {
             "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
         }}
       ></div>
-       <div className="h-screen w-screen absolute bg-black opacity-55 z-0"></div>
+       <div className="h-screen w-screen absolute bg-black opacity-50 z-0"></div>
         {/* Foreground content */}
         <div className="relative items-center z-10">
           <div className={`${
