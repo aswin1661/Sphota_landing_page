@@ -56,8 +56,8 @@ export default function About() {
             isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
           } text-center tahoma text-white text-[1.3vh] sm:text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] mb-6 z-10`}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
-          Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          Lorem Ipsum has been the industry&apos;s <br /> standard dummy text ever since the 1500s,
           when an unknown printer
         </h3>
 
@@ -74,12 +74,14 @@ export default function About() {
               alt="Watermark"
               width={252}
               height={158}
+              min-width={125}
+              min-height={79}
             />
           </div>
 
           {/* Bullet list */}
           <ul
-            className={`square-bullet mt-[1vh] text-white tahoma text-sm lg:text-base text-left max-w-md ${
+            className={`square-bullet mt-[1vh] text-white tahoma mr-[5vw] ml-[5vw] text-sm lg:text-base text-left max-w-md ${
               isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
             }`}
           >

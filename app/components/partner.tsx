@@ -1,5 +1,7 @@
 'use client';
 import Image from 'next/image';
+import { useEffect, useRef, useState } from "react";
+import React from "react";
 
 const partners = [
   '/logoipsum1.png',
@@ -9,38 +11,68 @@ const partners = [
 ];
 
 export default function Partners() {
-  return (
-    <section className="relative overflow-hidden py-12">
-      {/* Blurred radial gradient background */}
-      <div className="absolute inset-0 z-0">
-        <div className="w-full h-full bg-black">
-          <div
-            className="absolute inset-0 bg-center bg-no-repeat bg-cover blur-3xl opacity-50"
-            style={{
-              background: `radial-gradient(circle at center, rgba(9, 30, 134, 0.7), rgba(0,0,0,1))`,
-            }}
-          />
-        </div>
-      </div>
+  const [isVisible, setIsVisible] = useState(false);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
-      {/* Foreground content */}
-      <div className="relative z-10">
-        <div className="text-center text-white text-2xl font-semibold mb-8">Our Partners</div>
-        <div className="flex justify-center gap-6 flex-wrap">
-          {partners.map((logo, index) => (
-            <div
-              key={index}
-              className="bg-white/10 p-4 rounded-md hover:scale-105 transition"
-            >
-              <Image
-                src={logo}
-                alt={`Partners ${index + 1}`}
-                width={150}
-                height={50}
-                className="object-contain grayscale hover:grayscale-0 transition duration-300"
-              />
-            </div>
-          ))}
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      {
+        root: null,
+        threshold: 0.3,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) observer.unobserve(sectionRef.current);
+    };
+  }, []);
+
+  return (
+    <section className="relative h-screen w-screen overflow-hidden py-12">
+      {/* Blurred radial gradient background */}
+      <div
+        ref={sectionRef}
+        className={`relative flex w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{ backgroundImage: "url('/images/about.jpg')" }}
+      >
+         <div
+        className="absolute inset-0 pointer-events-none opacity-100"
+        style={{
+          background:
+            "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
+        }}
+      ></div>
+       <div className="h-screen w-screen absolute bg-black opacity-55 z-0"></div>
+        {/* Foreground content */}
+        <div className="relative items-center z-10">
+          <div className={`${
+            isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
+          } text-center text-white text-2xl font-semibold mb-8 berserker`}>Our Partners</div>
+          <div className="flex justify-center gap-6 flex-wrap">
+            {partners.map((logo, index) => (
+              <div
+                key={index}
+                className={`${
+            isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
+          } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition`}
+              >
+                <Image
+                  src={logo}
+                  alt={`Partner ${index + 1}`}
+                  width={150}
+                  height={50}
+                  className="object-contain grayscale hover:grayscale-0 transition duration-300"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -57,6 +57,9 @@
   box-shadow: inset 0px 0px 15px #195480;
   -webkit-clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
 }
+.border{
+  border: 1px solid #ffffff4c;
+}
 
 .arrow {
   position: absolute;
@@ -252,9 +255,9 @@
 }
 
 .animated {
-    animation-duration: 1.5s;
+    animation-duration: 1s;
     animation-fill-mode: both;
-    -webkit-animation-duration: 1s;
+    -webkit-animation-duration: 0.8s;
     -webkit-animation-fill-mode: both
 }
 
@@ -323,11 +326,11 @@
 
   .fade-in-left {
     opacity: 1;
-    animation: fadeInLeft 1s ease-out forwards;
+    animation: fadeInLeft 0.7s ease-out forwards;
   }
   .fade-in-right {
     opacity: 1;
-    animation: fadeInRight 1s ease-out forwards;
+    animation: fadeInRight 0.7s ease-out forwards;
   
 }
 

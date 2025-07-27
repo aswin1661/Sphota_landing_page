@@ -1,5 +1,6 @@
 import About from "./components/about";
 import FAQ from "./components/faq";
+import Footer from "./components/footer";
 import Home from "./components/home";
 import Partners from "./components/partner";
 import Timeline from "./components/timeline";
@@ -10,8 +11,9 @@ export default function Page() {
        <Home/> 
       <About/>
       <Timeline/> 
-      <Partners />
       <FAQ />
+      <Partners />
+      <Footer />
     </div>
   );
 }
