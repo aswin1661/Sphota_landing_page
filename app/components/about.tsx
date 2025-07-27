@@ -32,7 +32,7 @@ export default function About() {
 
             <h3 className="animated animatedFadeInUp fadeInUp text-center tahoma text-white text-[1.3vh] sm:text-[1.3vh] lg:text-[2vh] mb-6">
                 Lorem Ipsum is simply dummy text of the printing and typesetting industry.<br />
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, <br />
+                Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, <br />
                 when an unknown printer
             </h3>
 
