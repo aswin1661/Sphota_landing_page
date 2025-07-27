@@ -74,7 +74,7 @@ export default function FAQ() {
               key={index}
               className={`${
             isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
-          } bg-white/10 rounded-lg mr-[5vw] ml-[5vw] shadow-md transition-all duration-300`}
+          } bg-black/50 rounded-lg mr-[5vw] ml-[5vw] shadow-md transition-all duration-300`}
             >
               <button
                 onClick={() => toggle(index)}
