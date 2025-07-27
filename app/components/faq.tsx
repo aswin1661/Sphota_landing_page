@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     question: 'Is there a fee to join?',
-    answer: 'No, Sphota events are completely free for all registered participants.',
+    answer: 'yes, Sphota events have a fee payment for all registered participants.',
   },
 ];
 
