@@ -29,7 +29,7 @@ export default function About() {
     <div
       ref={sectionRef}
       className={`relative flex overflow-hidden w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
-      style={{ backgroundImage: "url('/images/naaa.jpeg')" }}
+      style={{ backgroundImage: "url('/images/about.jpeg')" }}
     >
       {/* Gradient Overlay */}
       <div
@@ -41,7 +41,7 @@ export default function About() {
       ></div>
 
       <div className="h-screen w-screen mt-10 flex flex-col items-center justify-center text-white">
-        <div className="h-screen w-screen absolute bg-black opacity-45 z-0"></div>
+        <div className="h-screen w-screen absolute bg-black opacity-40 z-0"></div>
 
         <h2
           className={`${

@@ -55,7 +55,7 @@ export default function FAQ() {
       <div
         ref={sectionRef}
         className={`absolute flex w-screen h-screen items-center overflow-hidden flex-col justify-center bg-cover bg-center  `}
-        style={{ backgroundImage: "url('/images/faq.jpg')" }}
+        style={{ backgroundImage: "url('/images/faq.jpeg')" }}
       >
               <div
         className="absolute inset-0 pointer-events-none opacity-100"
@@ -64,7 +64,7 @@ export default function FAQ() {
             "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
         }}
       ></div>
-       <div className="h-screen w-screen absolute bg-black opacity-45 z-0"></div> 
+       <div className="h-screen w-screen absolute bg-black opacity-25 z-0"></div> 
         <h2 className={`${
             isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
           } text-4xl z-10 font-bold mb-10 text-center berserker `}>Frequently Asked Questions</h2>

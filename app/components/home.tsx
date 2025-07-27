@@ -20,7 +20,7 @@ export default function Home() {
       className={`relative flex w-screen h-screen items-center justify-center bg-cover bg-center transition-opacity duration-700 ${
         bgVisible ? 'opacity-100' : 'opacity-0'
       }`}
-      style={{ backgroundImage: "url('/images/home2.jpg')" }}
+      style={{ backgroundImage: "url('/images/home.jpeg')" }}
     >
       {/* Watermark Logo */}
       <div className="absolute top-4 left-4 z-20 opacity-85">
@@ -43,7 +43,7 @@ export default function Home() {
       </nav>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-100"
+      <div className="absolute inset-0 pointer-events-none opacity-80"
   style={{
     background: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.85) 80%, black 100%)"
   }}

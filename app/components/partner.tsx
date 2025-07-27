@@ -40,7 +40,7 @@ export default function Partners() {
         className={`relative flex w-full min-h-[100dvh] items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
-        style={{ backgroundImage: "url('/images/partners.jpg')" }}
+        style={{ backgroundImage: "url('/images/partners.jpeg')" }}
       >
         {/* Gradient overlays */}
         <div
@@ -50,7 +50,7 @@ export default function Partners() {
               "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
           }}
         />
-        <div className="absolute inset-0 bg-black opacity-50 z-0" />
+        <div className="absolute inset-0 bg-black opacity-30 z-0" />
 
         {/* Foreground Content */}
         <div className="relative z-10 flex flex-col items-center px-4">
