@@ -29,7 +29,7 @@ export default function About() {
     <div
       ref={sectionRef}
       className={`relative flex w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
-      style={{ backgroundImage: "url('/images/about.jpg')" }}
+      style={{ backgroundImage: "url('/images/home.jpg')" }}
     >
       {/* Gradient Overlay */}
       <div
@@ -66,7 +66,7 @@ export default function About() {
           {/* Image */}
           <div
             className={`flex-shrink-0 ${
-              isVisible ? 'fade-in-left' : 'opacity-0'
+              isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
             }`}
           >
             <Image
@@ -80,7 +80,7 @@ export default function About() {
           {/* Bullet list */}
           <ul
             className={`square-bullet mt-[1vh] text-white tahoma text-sm lg:text-base text-left max-w-md ${
-              isVisible ? 'fade-in-right' : 'opacity-0'
+              isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
             }`}
           >
             <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
@@ -93,7 +93,7 @@ export default function About() {
         {/* Button */}
         <button
           className={`mt-3 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition ${
-            isVisible ? 'fade-in-right' : 'opacity-0'
+            isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
           } z-10`}
         >
           Learn More
