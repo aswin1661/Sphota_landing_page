@@ -57,7 +57,7 @@ export default function Partners() {
           <h2
             className={`${
               isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            } text-center text-white text-2xl md:text-4xl font-semibold mb-8 font-[sans-serif]`}
+            } text-center text-white text-2xl md:text-4xl font-semibold mb-8 berserker`}
           >
             Our Partners
           </h2>
