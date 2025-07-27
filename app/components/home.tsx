@@ -43,11 +43,12 @@ export default function Home() {
       </nav>
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 pointer-events-none opacity-90"
-        style={{
-          background: "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%, black 100%)"
-        }}
-      ></div>
+      <div className="absolute inset-0 pointer-events-none opacity-100"
+  style={{
+    background: "linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 15%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.85) 80%, black 100%)"
+  }}
+></div>
+
 
       {/* Heading and Description */}
       <h1 className="animated animatedFadeInUp fadeInUp absolute pt-[10vh] berserker text-5xl">SPHOTA</h1>
