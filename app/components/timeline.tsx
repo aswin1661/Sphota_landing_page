@@ -1,11 +1,30 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-
+import React from "react";
 export default function TimeLine() {
   const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [visibleSections, setVisibleSections] = useState<number[]>([]);
-
+  const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLDivElement | null>(null);
+  
+    useEffect(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => setIsVisible(entry.isIntersecting),
+        {
+          root: null,
+          threshold: 0.3, // Adjust based on how early you want it to trigger
+        }
+      );
+  
+      if (sectionRef.current) {
+        observer.observe(sectionRef.current);
+      }
+  
+      return () => {
+        if (sectionRef.current) observer.unobserve(sectionRef.current);
+      };
+    }, []);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -41,12 +60,12 @@ export default function TimeLine() {
   }, []);
 
   const timelineData = [
-    { year: '2017', text: 'Lorem ipsum dolor sit amet...' },
-    { year: '2016', text: 'Lorem ipsum dolor sit amet...' },
-    { year: '2015', text: 'Lorem ipsum dolor sit amet...' },
-    { year: '2012', text: 'Lorem ipsum dolor sit amet...' },
-    { year: '2011', text: 'Lorem ipsum dolor sit amet...' },
-    { year: '2007', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
   ];
 
   return (
@@ -63,6 +82,13 @@ export default function TimeLine() {
         }}
       />
       <div className="absolute inset-0 bg-black/25" />
+      <h2 ref={sectionRef}
+          className={`${
+          isVisible ? 'animated animatedFadeInUp fadeIn' : 'opacity-0'
+          } berserker text-5xl mb-6 text-center z-10`}>
+        Timeline
+      </h2>
+
 
       <div className="timeline">
         {timelineData.map((item, index) => {
@@ -86,7 +112,7 @@ export default function TimeLine() {
                     : 'opacity-0'
                 }`}
               >
-                <h2>{item.year}</h2>
+                <h2>{item.name}</h2>
                 <p>{item.text}</p>
               </div>
             </div>

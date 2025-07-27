@@ -240,11 +240,21 @@
         opacity: 1
     }
 }
+@-webkit-keyframes fadeIn {
+    from {
+        transform: translate3d(0,0,0)
+    }
+
+    to {
+        transform: translate3d(0,0,0);
+        opacity: 1
+    }
+}
 
 .animated {
     animation-duration: 1.5s;
     animation-fill-mode: both;
-    -webkit-animation-duration: 1.5s;
+    -webkit-animation-duration: 2s;
     -webkit-animation-fill-mode: both
 }
 
@@ -256,6 +266,11 @@
     opacity: 0;
     animation-name: fadeInUp;
     -webkit-animation-name: fadeInUp;
+}
+.fadeIn {
+    opacity: 0;
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
 }
 
 .square-bullet li {
