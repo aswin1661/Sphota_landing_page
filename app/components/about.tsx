@@ -28,8 +28,8 @@ export default function About() {
   return (
     <div
       ref={sectionRef}
-      className={`relative flex w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
-      style={{ backgroundImage: "url('/images/about.jpg')" }}
+      className={`relative flex overflow-hidden w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
+      style={{ backgroundImage: "url('/images/nana.jpg')" }}
     >
       {/* Gradient Overlay */}
       <div
