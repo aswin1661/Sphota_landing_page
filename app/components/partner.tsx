@@ -33,35 +33,42 @@ export default function Partners() {
   }, []);
 
   return (
-    <section className="relative  h-screen w-screen overflow-hidden py-12">
-      {/* Blurred radial gradient background */}
+    <section className="relative min-h-[100dvh] w-screen overflow-hidden py-12">
+      {/* Background */}
       <div
         ref={sectionRef}
-        className={`relative flex w-screen h-full overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
+        className={`relative flex w-full min-h-[100dvh] items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
         style={{ backgroundImage: "url('/images/partners.jpg')" }}
       >
-         <div
-        className="absolute inset-0 pointer-events-none opacity-100"
-        style={{
-          background:
-            "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
-        }}
-      ></div>
-       <div className="h-screen w-screen absolute bg-black opacity-50 z-0"></div>
-        {/* Foreground content */}
-        <div className="relative items-center z-10">
-          <div className={`${
-            isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
-          } text-center text-white text-2xl font-semibold mb-8 berserker`}>Our Partners</div>
+        {/* Gradient overlays */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
+          }}
+        />
+        <div className="absolute inset-0 bg-black opacity-50 z-0" />
+
+        {/* Foreground Content */}
+        <div className="relative z-10 flex flex-col items-center px-4">
+          <h2
+            className={`${
+              isVisible ? 'animate-fade-in-up' : 'opacity-0'
+            } text-center text-white text-2xl md:text-4xl font-semibold mb-8 font-[sans-serif]`}
+          >
+            Our Partners
+          </h2>
+
           <div className="flex justify-center gap-6 flex-wrap">
             {partners.map((logo, index) => (
               <div
                 key={index}
                 className={`${
-            isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
-          } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition`}
+                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
+                } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition duration-300`}
               >
                 <Image
                   src={logo}
