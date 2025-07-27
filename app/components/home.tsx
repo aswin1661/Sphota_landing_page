@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <div
-      className={`relative flex w-screen h-screen items-center justify-center bg-cover bg-center transition-opacity duration-700 ${
+      className={`relative flex w-screen h-screen overflow-hidden items-center justify-center bg-cover bg-center transition-opacity duration-700 ${
         bgVisible ? 'opacity-100' : 'opacity-0'
       }`}
       style={{ backgroundImage: "url('/images/home.jpeg')" }}

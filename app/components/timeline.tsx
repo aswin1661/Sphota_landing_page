@@ -70,7 +70,7 @@ export default function TimeLine() {
 
   return (
     <div
-      className="relative w-screen min-h-screen bg-cover bg-center py-24 px-4"
+      className="relative w-screen overflow-hidden min-h-screen bg-cover bg-center py-24 px-4"
       style={{ backgroundImage: "url('/images/timeline.jpeg')" }}
     >
       {/* Background overlays */}
