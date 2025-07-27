@@ -81,7 +81,7 @@ export default function TimeLine() {
             'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)',
         }}
       />
-      <div className="absolute inset-0 bg-black/5" />
+      <div className="absolute inset-0 bg-black/50" />
       <h2 ref={sectionRef}
           className={`${
           isVisible ? 'animated animatedFadeInUp fadeIn' : 'opacity-0'
