@@ -29,7 +29,7 @@ export default function About() {
     <div
       ref={sectionRef}
       className={`relative flex overflow-hidden w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
-      style={{ backgroundImage: "url('/images/nnnn.jpg')" }}
+      style={{ backgroundImage: "url('/images/naaa.jpeg')" }}
     >
       {/* Gradient Overlay */}
       <div
