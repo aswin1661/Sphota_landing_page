@@ -24,7 +24,7 @@ export default function Home() {
     >
       {/* Watermark Logo */}
       <div className="absolute top-4 left-4 z-20 opacity-85">
-        <Image src="/images/IEEE logo Full White.png" alt="Watermark" width={80} height={50} />
+        <Image src="/images/logos.png" alt="Watermark" width={80} height={50} />
       </div>
 
       {/* Navigation Bar */}
