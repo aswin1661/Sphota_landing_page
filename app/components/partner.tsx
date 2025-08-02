@@ -4,10 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 
 const partners = [
-  '/logoipsum1.png',
-  '/logoipsum2.png',
-  '/logoipsum3.png',
-  '/logoipsum4.png',
+  '',
+  '',
+  '',
+  '',
 ];
 
 export default function Partners() {
@@ -33,7 +33,8 @@ export default function Partners() {
   }, []);
 
   return (
-    <section className="relative min-h-[100dvh] w-screen overflow-hidden py-12">
+    <section className="relative min-h-[100dvh] w-screen overflow-hidden py-12" 
+    id='spo'>
       {/* Background */}
       <div
         ref={sectionRef}

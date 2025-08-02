@@ -30,6 +30,7 @@ export default function About() {
       ref={sectionRef}
       className={`relative flex overflow-hidden w-screen h-full items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 `}
       style={{ backgroundImage: "url('/images/about.jpeg')" }}
+      id="about"
     >
       {/* Gradient Overlay */}
       <div

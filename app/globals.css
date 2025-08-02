@@ -1,5 +1,8 @@
 @import "tailwindcss";
-
+html{
+  scroll-behavior: smooth;
+  overflow-x:hidden;
+}
 
 .cinzel-decorative-regular {
   font-family: "Cinzel Decorative", serif;
@@ -464,5 +467,41 @@
   /* Make all right containers behave like the left ones */
   .right {
   left: 0%;
+  }
+}
+
+
+
+
+.smoke-particle {
+  position: absolute;
+  background: radial-gradient(circle, rgba(128, 0, 128, 0.3) 0%, transparent 70%);
+  animation: floatUp 8s ease-out forwards, driftSide 6s ease-in-out infinite;
+  filter: url(#smokeDistortion);
+  border-radius: 50%;
+  opacity: 0.6;
+  z-index: 50;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-200px) scale(1.8);
+    opacity: 0;
+  }
+}
+
+@keyframes driftSide {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

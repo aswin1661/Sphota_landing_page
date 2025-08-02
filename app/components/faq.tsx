@@ -51,6 +51,7 @@ export default function FAQ() {
   return (
     <section
       className="w-screen h-screen overflow-y-auto  bg-gradient-to-b  text-white px-6 py-16 flex flex-col items-center"
+    id="faq"
     >
       <div
         ref={sectionRef}

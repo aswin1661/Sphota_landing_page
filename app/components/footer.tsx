@@ -1,19 +1,32 @@
 'use client';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 export default function Footer() {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
-    <footer className="w-screen h-full text-white  bg-gradient-to-b from-black to-gray-900 px-10 py-10" >
-        
-      <div className="max-w-6xl mx-auto flex flex-col  justify-between items-center gap-8">
-        
+    <footer className="w-screen h-full text-white bg-gradient-to-b from-black to-gray-900 px-10 py-10">
+      <div className="max-w-6xl mx-auto flex flex-col justify-between items-center gap-8">
         {/* Logo Section */}
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-5 relative">
-            <Image src="/images/IEEE logo Full White.png" alt="Sphota Logo" className="object-contain" width={120} height={75} />
-          </div>
-          <span className="text-xl mt-10 font-semibold berserker">Sphota</span>
-        </div>
+
+        {/* Logo Section */}
+<div className="flex items-center gap-2">
+  <div className="transform scale-[0.9] origin-left">
+    <Image
+      src="/images/logos.png"
+      alt="Sphota Logo"
+      width={120}
+      height={75}
+      className="object-contain"
+    />
+  </div>
+  <span className="text-xl font-semibold berserker self-center">Sphota</span>
+</div>
 
         {/* Links Section */}
         <div className="flex flex-row md:flex-row gap-4 text-gray-300 text-sm">
@@ -24,9 +37,11 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="text-xs text-gray-400 text-center md:text-right">
-          © {new Date().getFullYear()} Sphota. All rights reserved.
-        </div>
+        {year && (
+          <div className="text-xs text-gray-400 text-center md:text-right">
+            © {year} Sphota. All rights reserved.
+          </div>
+        )}
       </div>
     </footer>
   );

@@ -1,7 +1,11 @@
 
 .wrapper {
   width: 200px;
-  height: 60px;
+  position:fixed;
+  display:flex;
+  justify-self:center;
+  margin-top:45vh;
+  height: 55vh;
   position: relative;
   z-index: 1;
 }

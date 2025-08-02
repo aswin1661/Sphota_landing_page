@@ -8,12 +8,12 @@ import Timeline from "./components/timeline";
 export default function Page() {
   return (
     <div>
-       <Home/> 
+      <Home/> 
       <About/>
       <Timeline/> 
       <FAQ />
       <Partners />
-      <Footer />
+      <Footer /> 
     </div>
   );
 }
