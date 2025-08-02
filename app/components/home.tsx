@@ -27,7 +27,7 @@ export default function Home() {
         </div>
 
         {/* Navigation Bar */}
-        <nav className="absolute top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-3xl px-2 flex justify-center sm:justify-center">
+        <nav className="absolute  animated animatedFadeInUp fadeInUp top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-3xl px-2 flex justify-center sm:justify-center">
           <div className="hidden md:flex gap-10 px-8 py-4 rounded-full">
             <NavLink href="/">Home</NavLink>
             <NavLink href="#about">About</NavLink>
@@ -48,12 +48,12 @@ export default function Home() {
         />
 
         {/* Heading */}
-        <h1 className="absolute pt-[10vh] berserker text-5xl text-white drop-shadow-md">
+        <h1 className="absolute pt-[10vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
           SPHOTA
         </h1>
 
         {/* Description */}
-        <h3 className="absolute text-center pt-[30vh] tahoma text-white text-[1.3vh] lg:text-[2vh] px-[5vw]">
+        <h3 className="absolute text-center pt-[30vh] tahoma  animated animatedFadeInUp fadeInUp text-white text-[1.3vh] lg:text-[2vh] px-[5vw]">
           Lorem Ipsum is simply dummy text of the printing and typesetting industry.
           <br />
           Lorem Ipsum has been the industry&apos;s standard dummy text ever since the
@@ -63,7 +63,7 @@ export default function Home() {
         </h3>
 
         {/* Register Button */}
-        <button className="button mt-[55vh]">
+        <button className="button  animated animatedFadeInUp fadeInUp mt-[55vh]">
           R E G I S T E R
           <div id="clip">
             <div id="leftTop" className="corner"></div>
@@ -76,7 +76,7 @@ export default function Home() {
         </button>
 
         {/* Countdown */}
-        <div className="absolute mt-[75vh] text-white text-center px-6 py-2 rounded-lg shadow-lg">
+        <div className="absolute mt-[75vh]  animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg shadow-lg">
           <Countdown targetDate="2025-08-23T00:00:00" />
         </div>
       </section>
