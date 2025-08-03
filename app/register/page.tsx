@@ -12,10 +12,26 @@ export default function Registration() {
     setShowModal(true);
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     setShowModal(false);
-    if (formRef.current) {
-      formRef.current.submit();
+
+    if (!formRef.current) return;
+
+    const form = formRef.current;
+    const formData = new FormData(form);
+
+    try {
+      await fetch(form.action, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: formData,
+      });
+
+      // ✅ Redirect to your custom thank-you page
+      window.location.href = '/thank-you';
+    } catch (error) {
+      console.error('Submission failed', error);
+      alert('Something went wrong. Please try again.');
     }
   };
 
@@ -25,14 +41,17 @@ export default function Registration() {
 
   return (
     <div className="flex justify-center bg items-center h-auto w-screen relative">
-      <h3 className='absolute top-0 mt-[5vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md'>Sphota</h3>
+      <h3 className="absolute top-0 mt-[5vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
+        Sphota
+      </h3>
+
       {/* Form */}
       <div className={`form-container mt-[15vh] mb-[10vh] ${showModal ? 'hidden' : ''}`}>
         <form
           className="form"
           ref={formRef}
           onSubmit={handleSubmit}
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfu95byQLy0NudlOVkAvgcoGkJcDaa8rUBQRDhjfGaZCxzpUg/formResponse?"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfu95byQLy0NudlOVkAvgcoGkJcDaa8rUBQRDhjfGaZCxzpUg/formResponse"
           method="POST"
         >
           <div className="form-group">
@@ -40,9 +59,9 @@ export default function Registration() {
             <input type="text" id="Name" name="entry.2092250368" required />
 
             <label htmlFor="email">Email</label>
-            <input type="text" id="email" name="entry.1135390185" required />
+            <input type="email" id="email" name="entry.1135390185" required />
 
-            <label htmlFor="Number">Phone Number</label>
+            <label htmlFor="ph">Phone Number</label>
             <input type="text" id="ph" name="entry.364808322" required />
 
             <label htmlFor="clg">College</label>
@@ -57,10 +76,18 @@ export default function Registration() {
 
           <div className="form-group">
             <label htmlFor="textarea">Description</label>
-            <textarea name="entry.44834785" id="textarea" rows={10} cols={50} required />
+            <textarea
+              name="entry.44834785"
+              id="textarea"
+              rows={10}
+              cols={50}
+              required
+            />
           </div>
 
-          <button className="form-submit-btn" type="submit">Submit</button>
+          <button className="form-submit-btn" type="submit">
+            Submit
+          </button>
         </form>
       </div>
 
@@ -86,10 +113,11 @@ export default function Registration() {
               <p className="font-medium text-lg text-red-600">Confirmation Required</p>
             </div>
 
-            <p className="text-gray-500 mb-6">
+            <p className="text-gray-300 mb-6">
               After submitting the form, you will receive an email containing a payment link.
-              Please complete the payment and share a screenshot of the successful transaction with the phone number provided in the email.
-              Your ticket will be sent to you via email once the payment is confirmed.
+              Please complete the payment and share a screenshot of the successful transaction
+              with the phone number provided in the email. Your ticket will be sent to you via email
+              once the payment is confirmed.
             </p>
 
             <div className="flex justify-end gap-4">
