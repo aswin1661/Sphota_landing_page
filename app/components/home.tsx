@@ -48,20 +48,14 @@ export default function Home() {
         />
 
         {/* Heading */}
-        <h1 className="absolute pt-[10vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
+        <h1 className="absolute pt-[20vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
           SPHOTA
         </h1>
 
         {/* Description */}
-        <h3 className="absolute text-center pt-[30vh] tahoma  animated animatedFadeInUp fadeInUp text-white text-[1.3vh] lg:text-[2vh] px-[5vw]">
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          <br />
-          Lorem Ipsum has been the industry&apos;s standard dummy text ever since the
-          1500s,
-          <br />
-          when an unknown printer
-        </h3>
-
+        <h1 className="absolute text-center pt-[35vh] tahoma  animated animatedFadeInUp fadeInUp text-white text-[1.9vh] lg:text-[2vh] px-[5vw]">
+         24 hours.Your sphota.Our Celebration
+          </h1>
         {/* Register Button */}
         <button className="button  animated animatedFadeInUp fadeInUp mt-[55vh]">
           R E G I S T E R

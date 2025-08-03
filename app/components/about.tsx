@@ -57,9 +57,7 @@ export default function About() {
             isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
           } text-center tahoma text-white text-[1.3vh] sm:text-[1.3vh] lg:text-[2vh] mr-[5vw] ml-[5vw] mb-6 z-10`}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          Lorem Ipsum has been the industry&apos;s <br /> standard dummy text ever since the 1500s,
-          when an unknown printer
+         SPHOTA is a 24-hour offline hackathon organized by IEEE SB UCEK and IEEE SB STIST. It brings engineering students <br/> from across Kerala for a Celebration of creativity, code, and collaboration.
         </h3>
 
         {/* Responsive row */}
@@ -86,11 +84,10 @@ export default function About() {
               isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
             }`}
           >
-            <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-            <li>Quisque vel leo a justo elementum ullamcorper.</li>
-            <li>Mauris in lorem non metus pharetra pulvinar.</li>
-            <li>Vestibulum ante ipsum primis in faucibus orci luctus.</li>
-          </ul>
+            <li>Organized by IEEE SB UCEK & IEEE SB STIST.</li>
+            <li>24-hour in-person hackathon.</li>
+            <li>Teams of 2 to 4.</li>
+            </ul>
         </div>
 
       </div>

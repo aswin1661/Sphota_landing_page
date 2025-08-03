@@ -5,7 +5,7 @@ import React from "react";
 const faqs = [
   {
     question: 'What is Sphota?',
-    answer: 'Sphota is an innovative platform designed to foster communication and collaboration in unique ways.',
+    answer: 'SPHOTA is a 24-hour offline hackathon organized by IEEE SB UCEK and IEEE SB STIST. It brings engineering students from across Kerala for a Celebration of creativity, code, and collaboration',
   },
   {
     question: 'Who can participate in Sphota events?',
@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     question: 'How do I register?',
-    answer: 'You can register via our official website by filling out the registration form available on the homepage.',
+    answer: 'You can register via our official website by filling out the registration form available on the registration by completing the payment.',
   },
   {
     question: 'Is there a fee to join?',
