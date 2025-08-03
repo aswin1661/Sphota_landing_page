@@ -24,36 +24,40 @@ export default function Registration() {
   };
 
   return (
-    <div className="flex justify-center items-center h-[100vh] w-screen relative">
+    <div className="flex justify-center bg items-center h-auto w-screen relative">
+      <h3 className='absolute top-0 mt-[5vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md'>Sphota</h3>
       {/* Form */}
-      <div className={`form-container ${showModal ? 'hidden' : ''}`}>
+      <div className={`form-container mt-[15vh] mb-[10vh] ${showModal ? 'hidden' : ''}`}>
         <form
           className="form"
           ref={formRef}
           onSubmit={handleSubmit}
-          action="/your-endpoint"
+          action="https://docs.google.com/forms/d/e/1FAIpQLSfu95byQLy0NudlOVkAvgcoGkJcDaa8rUBQRDhjfGaZCxzpUg/formResponse?"
           method="POST"
         >
           <div className="form-group">
             <label htmlFor="Name">Name</label>
-            <input type="text" id="Name" name="Name" required />
+            <input type="text" id="Name" name="entry.2092250368" required />
 
             <label htmlFor="email">Email</label>
-            <input type="text" id="email" name="email" required />
+            <input type="text" id="email" name="entry.1135390185" required />
+
+            <label htmlFor="Number">Phone Number</label>
+            <input type="text" id="ph" name="entry.364808322" required />
 
             <label htmlFor="clg">College</label>
-            <input type="text" id="clg" name="collage" required />
+            <input type="text" id="clg" name="entry.1589457548" required />
 
             <label htmlFor="year">Graduation Year</label>
-            <input type="number" id="year" name="year" required />
+            <input type="number" id="year" name="entry.926337240" required />
 
             <label htmlFor="branch">Branch</label>
-            <input type="text" id="branch" name="branch" required />
+            <input type="text" id="branch" name="entry.977838638" required />
           </div>
 
           <div className="form-group">
             <label htmlFor="textarea">Description</label>
-            <textarea name="textarea" id="textarea" rows={10} cols={50} required />
+            <textarea name="entry.44834785" id="textarea" rows={10} cols={50} required />
           </div>
 
           <button className="form-submit-btn" type="submit">Submit</button>
@@ -82,7 +86,7 @@ export default function Registration() {
               <p className="font-medium text-lg text-red-600">Confirmation Required</p>
             </div>
 
-            <p className="text-gray-700 mb-6">
+            <p className="text-gray-500 mb-6">
               After submitting the form, you will receive an email containing a payment link.
               Please complete the payment and share a screenshot of the successful transaction with the phone number provided in the email.
               Your ticket will be sent to you via email once the payment is confirmed.
@@ -91,13 +95,13 @@ export default function Registration() {
             <div className="flex justify-end gap-4">
               <button
                 onClick={handleConfirm}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                className="bg-stone-300 text-gray-900 px-4 py-2 rounded hover:bg-stone-400"
               >
                 Continue
               </button>
               <button
                 onClick={handleCancel}
-                className="bg-stone-300 text-gray-800 px-4 py-2 rounded hover:bg-stone-400"
+                className="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
               >
                 Cancel
               </button>

@@ -54,18 +54,18 @@ export default function Home() {
         />
 
         {/* Heading */}
-        <h1 className="absolute pt-[20vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
+        <h1 className="absolute pt-[25vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md">
           SPHOTA
         </h1>
 
         {/* Description */}
-        <h1 className="absolute text-center pt-[35vh] tahoma  animated animatedFadeInUp fadeInUp text-white text-[1.9vh] lg:text-[2vh] px-[5vw]">
+        <h1 className="absolute text-center pt-[40vh] tahoma  animated animatedFadeInUp fadeInUp text-white text-[1.9vh] lg:text-[2vh] px-[5vw]">
          24 hours.Your sphota.Our Celebration
           </h1>
         {/* Register Button */}
          <button
       onClick={handleRegisterClick}
-      className="button animated animatedFadeInUp fadeInUp mt-[55vh]"
+      className="button animated animatedFadeInUp fadeInUp mt-[70vh]"
     >
       R E G I S T E R
       <div id="clip">
@@ -79,7 +79,7 @@ export default function Home() {
     </button>
 
         {/* Countdown */}
-        <div className="absolute mt-[75vh]  animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg shadow-lg">
+        <div className="absolute mt-[50vh]  animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg shadow-lg">
           <Countdown targetDate="2025-08-23T00:00:00" />
         </div>
       </section>
