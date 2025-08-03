@@ -1,5 +1,5 @@
 'use client';
-
+import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +8,11 @@ import dynamic from "next/dynamic";
 const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleRegisterClick = () => {
+    router.push('/register');
+  };
   return (
     <div className="relative w-full min-h-screen overflow-x-hidden">
       {/* Background section */}
@@ -58,17 +63,20 @@ export default function Home() {
          24 hours.Your sphota.Our Celebration
           </h1>
         {/* Register Button */}
-        <button className="button  animated animatedFadeInUp fadeInUp mt-[55vh]">
-          R E G I S T E R
-          <div id="clip">
-            <div id="leftTop" className="corner"></div>
-            <div id="rightBottom" className="corner"></div>
-            <div id="rightTop" className="corner"></div>
-            <div id="leftBottom" className="corner"></div>
-          </div>
-          <span id="rightArrow" className="arrow"></span>
-          <span id="leftArrow" className="arrow"></span>
-        </button>
+         <button
+      onClick={handleRegisterClick}
+      className="button animated animatedFadeInUp fadeInUp mt-[55vh]"
+    >
+      R E G I S T E R
+      <div id="clip">
+        <div id="leftTop" className="corner"></div>
+        <div id="rightBottom" className="corner"></div>
+        <div id="rightTop" className="corner"></div>
+        <div id="leftBottom" className="corner"></div>
+      </div>
+      <span id="rightArrow" className="arrow"></span>
+      <span id="leftArrow" className="arrow"></span>
+    </button>
 
         {/* Countdown */}
         <div className="absolute mt-[75vh]  animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg shadow-lg">
