@@ -30,10 +30,10 @@ export default function Footer() {
 
         {/* Links Section */}
         <div className="flex flex-row md:flex-row gap-4 text-gray-300 text-sm">
+          <a href="#home" className="hover:text-white transition">Home</a>
           <a href="#about" className="hover:text-white transition">About</a>
-          <a href="#events" className="hover:text-white transition">Events</a>
-          <a href="#team" className="hover:text-white transition">Team</a>
-          <a href="#contact" className="hover:text-white transition">Contact</a>
+          <a href="#spo" className="hover:text-white transition">Partners</a>
+          <a href="/register" className="hover:text-white transition">register</a>
         </div>
 
         {/* Copyright */}
