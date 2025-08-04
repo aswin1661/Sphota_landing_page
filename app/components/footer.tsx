@@ -33,7 +33,7 @@ export default function Footer() {
           <a href="#home" className="hover:text-white transition">Home</a>
           <a href="#about" className="hover:text-white transition">About</a>
           <a href="#spo" className="hover:text-white transition">Partners</a>
-          <a href="/register" className="hover:text-white transition">register</a>
+          <a href="/register" className="hover:text-white transition">Register</a>
         </div>
 
         {/* Copyright */}
