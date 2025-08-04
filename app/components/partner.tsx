@@ -43,15 +43,16 @@ export default function Partners() {
         }`}
         style={{ backgroundImage: "url('/images/partners.jpeg')" }}
       >
+        
         {/* Gradient overlays */}
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 z-11 pointer-events-none"
           style={{
             background:
               "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
           }}
         />
-        <div className="absolute inset-0 bg-black opacity-30 z-0" />
+        <div className="absolute inset-0 bg-black opacity-30 z-10" />
 
         {/* Foreground Content */}
         <div className="relative z-10 flex flex-col items-center px-4">

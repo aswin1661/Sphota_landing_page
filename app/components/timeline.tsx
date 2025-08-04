@@ -76,22 +76,37 @@ export default function TimeLine() {
     >
       {/* Background overlays */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 z-1  pointer-events-none"
         style={{
           background:
             'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)',
         }}
       />
-      <div className="absolute inset-0 bg-black/40" />
-      <h2 ref={sectionRef}
-          className={`${
-          isVisible ? 'animated animatedFadeInUp fadeIn' : 'opacity-0'
-          } berserker text-5xl mb-6 text-center z-10`}>
-        Timeline
-      </h2>
+      {/* ✅ Video overlay */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-20"
+        >
+          <source src="/videos/overlay2.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      <div className="absolute inset-0 z-8 bg-black/40" />
+       <div className="relative z-30">
+    <h2
+      ref={sectionRef}
+      className={`${
+        isVisible ? 'animated animatedFadeInUp fadeIn' : 'opacity-0'
+      } berserker text-5xl mb-6 text-center text-white`}
+    >
+      Timeline
+    </h2>
+  </div>
 
 
-      <div className="timeline">
+      <div className="timeline z-99">
         {timelineData.map((item, index) => {
           const isLeft = index % 2 === 0;
           const isVisible = visibleSections.includes(index);
