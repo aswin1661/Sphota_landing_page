@@ -15,7 +15,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative w-full min-h-screen overflow-x-hidden">
+    <div className="relative w-full min-h-screen   overflow-x-hidden">
       {/* Background section */}
       <section
         className="relative flex w-full h-screen items-center justify-center bg-cover bg-center transition-opacity duration-700"
@@ -34,7 +34,7 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
         {/* 🔳 Black filter overlay */}
-<div className="absolute inset-0 bg-black opacity-30 z-60 pointer-events-none" />
+<div className="absolute inset-0 bg-black opacity-10 z-60 pointer-events-none" />
 
         {/* Watermark Logo */}
         <div className="absolute top-7 left-5 z-20 opacity-85">
@@ -68,6 +68,12 @@ export default function Home() {
         }}
         id='home'
       ></div>
+      <div
+  className="absolute bottom-0 left-0 w-full opacity-80 h-1/4 z-50 pointer-events-none"
+  style={{
+    background: "linear-gradient(to top, black, transparent)",
+  }}
+></div>
 
         {/* Heading */}
         <h1 className="absolute pt-[25vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md z-30">
