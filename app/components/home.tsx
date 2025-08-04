@@ -28,13 +28,13 @@ export default function Home() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-25 opacity-25"
+          className="absolute inset-0 w-full h-full object-cover z-25 opacity-30"
         >
           <source src="/videos/overlay.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
         {/* 🔳 Black filter overlay */}
-<div className="absolute inset-0 bg-black opacity-40 z-60 pointer-events-none" />
+<div className="absolute inset-0 bg-black opacity-10 z-60 pointer-events-none" />
 
         {/* Watermark Logo */}
         <div className="absolute top-7 left-5 z-20 opacity-85">
