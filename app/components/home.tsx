@@ -28,7 +28,7 @@ export default function Home() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-25 opacity-18"
+          className="absolute inset-0 w-full h-full object-cover z-25 opacity-23"
         >
           <source src="/videos/overlay.mp4" type="video/mp4" />
           Your browser does not support the video tag.
