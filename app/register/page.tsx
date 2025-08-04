@@ -51,27 +51,27 @@ export default function Registration() {
           className="form"
           ref={formRef}
           onSubmit={handleSubmit}
-          action="https://docs.google.com/forms/d/e/1FAIpQLSfu95byQLy0NudlOVkAvgcoGkJcDaa8rUBQRDhjfGaZCxzpUg/formResponse"
+          action="https://airtable.com/app4i0uLAGQgFXHtS/pag02PKVx51lhmkPR/form"
           method="POST"
         >
           <div className="form-group">
             <label htmlFor="Name">Name</label>
-            <input type="text" id="Name" name="entry.2092250368" required />
+            <input type="text" id="2727b555ae45ad81d441718904b3854d" name="entry.2092250368" required />
 
             <label htmlFor="email">Email</label>
-            <input type="email" id="email" name="entry.1135390185" required />
+            <input type="email" id="9995187fe4bb8f8498826dad3eede1c3" name="entry.1135390185" required />
 
             <label htmlFor="ph">Phone Number</label>
-            <input type="text" id="ph" name="entry.364808322" required />
+            <input type="text" id="fde2e2966552aaef4f82dbd5296050f9" name="entry.364808322" required />
 
             <label htmlFor="clg">College</label>
-            <input type="text" id="clg" name="entry.1589457548" required />
+            <input type="text" id="42ad982da45aaf8627819c00726cf32d" name="entry.1589457548" required />
 
             <label htmlFor="year">Graduation Year</label>
-            <input type="number" id="year" name="entry.926337240" required />
+            <input type="number" id="d9ccc1911c4b34cdfab0caaa77300f0c" name="entry.926337240" required />
 
             <label htmlFor="branch">Branch</label>
-            <input type="text" id="branch" name="entry.977838638" required />
+            <input type="text" id="0c9f64a598c6189a7ec6a538727d1fdd" name="entry.977838638" required />
           </div>
 
           <div className="form-group">
