@@ -110,6 +110,16 @@ export default function Home() {
           <span id="leftArrow" className="arrow"></span>
         </button>
 
+        <a
+  href="https://drive.google.com/your-download-link"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="absolute mt-[80vh] text-white text-sm underline z-30 tahoma hover:text-blue-300 transition"
+>
+  Be our sponsors
+</a>
+
+
         {/* Countdown */}
         <div className="absolute mt-[45vh] animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg ">
           <Countdown targetDate="2025-08-23T00:00:00" />
