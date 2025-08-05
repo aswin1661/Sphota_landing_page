@@ -12,7 +12,7 @@ export default function About() {
       ([entry]) => setIsVisible(entry.isIntersecting),
       {
         root: null,
-        threshold: 0.3, // Adjust based on how early you want it to trigger
+        threshold: 0.3,
       }
     );
 
@@ -40,7 +40,7 @@ export default function About() {
             "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
         }}
       ></div>
-       {/* ✅ Video overlay */}
+       {/* Video overlay */}
         <video
           autoPlay
           loop

@@ -7,7 +7,7 @@ import Footer from './components/footer';
 import Home from './components/home';
 import Partners from './components/partner';
 import Timeline from './components/timeline';
-import  Loader  from './components/Loading';
+import Loader from './components/Loading';
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,7 +15,6 @@ export default function Page() {
   useEffect(() => {
     const preloadMedia = async () => {
       const mediaUrls: string[] = [
-        // ✅ Replace these with actual file paths
         '/images/bg-home.jpg',
         '/images/bg-about.jpg',
         '/videos/intro.mp4',
@@ -38,11 +37,15 @@ export default function Page() {
           video.onerror = () => resolve();
         });
 
+      // Wait for all media to preload
       await Promise.all(
         mediaUrls.map((url) =>
           url.endsWith('.mp4') ? preloadVideo(url) : preloadImage(url)
         )
       );
+
+      // ✅ Add 2 second delay after assets are loaded
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setIsLoading(false);
     };
@@ -52,7 +55,7 @@ export default function Page() {
 
   if (isLoading) {
     return (
-      <div className="h-screen w-screen flex align-center justify-center items-cen">
+      <div className="h-screen w-screen flex items-center justify-center">
         <Loader />
       </div>
     );

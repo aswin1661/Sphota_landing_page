@@ -44,7 +44,7 @@ export default function Partners() {
         style={{ backgroundImage: "url('/images/partners.jpeg')" }}
       >
         
-        {/* ✅ Video overlay */}
+        {/* Video overlay */}
         <video
           autoPlay
           loop

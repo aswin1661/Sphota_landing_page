@@ -22,7 +22,7 @@ export default function Home() {
         style={{ backgroundImage: "url('/images/home.jpeg')" }}
       >
 
-        {/* ✅ Video overlay */}
+        {/* Video overlay */}
         <video
           autoPlay
           loop
@@ -33,7 +33,7 @@ export default function Home() {
           <source src="/videos/2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {/* 🔳 Black filter overlay */}
+        {/* Black filter overlay */}
 <div className="absolute inset-0 bg-black flex flex-row opacity-10 z-60 pointer-events-none" />
 
         {/* Watermark Logo */}
@@ -48,8 +48,8 @@ export default function Home() {
   <Image
   src="/images/stist.png"
   alt="Watermark"
-  width={30.25}    // 25% of original width
-  height={15.125} // 25% of original height
+  width={30.25}   
+  height={15.125}
   priority
 />
 
@@ -129,7 +129,6 @@ export default function Home() {
   );
 }
 
-// ✅ Reusable link with styling
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
@@ -141,7 +140,6 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
   );
 }
 
-// ✅ Mobile nav with outside click detection
 function MobileNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLSpanElement>(null);
