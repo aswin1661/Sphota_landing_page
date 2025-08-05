@@ -60,12 +60,12 @@ export default function TimeLine() {
   }, []);
 
   const timelineData = [
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
   ];
 
   return (
