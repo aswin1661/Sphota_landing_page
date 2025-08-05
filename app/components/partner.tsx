@@ -44,6 +44,17 @@ export default function Partners() {
         style={{ backgroundImage: "url('/images/partners.jpeg')" }}
       >
         
+        {/* ✅ Video overlay */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-30"
+        >
+          <source src="/videos/overlay3.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         {/* Gradient overlays */}
         <div
           className="absolute inset-0 z-11 pointer-events-none"

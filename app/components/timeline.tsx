@@ -81,19 +81,18 @@ export default function TimeLine() {
           background:
             'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)',
         }}
-      />
-      {/* ✅ Video overlay */}
+      /> {/* ✅ Video overlay */}
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover opacity-30"
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-30"
         >
-          <source src="/videos/overlay2.mp4" type="video/mp4" />
+          <source src="/videos/overlay.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      <div className="absolute inset-0 z-8 bg-black/40" />
+      <div className="absolute inset-0 z-8 bg-black/10" />
        <div className="relative z-30">
     <h2
       ref={sectionRef}

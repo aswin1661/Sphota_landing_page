@@ -58,6 +58,7 @@ export default function FAQ() {
         className={`absolute flex w-screen h-screen items-center overflow-hidden flex-col justify-center bg-cover bg-center  `}
         style={{ backgroundImage: "url('/images/faq.jpeg')" }}
       >
+       
               <div
         className="absolute inset-0 pointer-events-none opacity-100"
         style={{

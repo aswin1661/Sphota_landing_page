@@ -34,12 +34,23 @@ export default function About() {
     >
       {/* Gradient Overlay */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-100"
+        className="absolute inset-0 z-10 pointer-events-none opacity-100"
         style={{
           background:
             "linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)",
         }}
       ></div>
+       {/* ✅ Video overlay */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-20"
+        >
+          <source src="/videos/overlay2.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
 
       <div className="h-screen w-screen mt-10 flex flex-col items-center justify-center text-white">
         <div className="h-screen w-screen absolute bg-black opacity-40 z-0"></div>
