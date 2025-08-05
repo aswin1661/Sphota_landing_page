@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <footer className="w-screen h-full text-white bg-gradient-to-b from-black to-gray-900 px-10 py-10 relative overflow-hidden">
       <div className="max-w-6xl mx-auto mb-[7vh] flex flex-col justify-between items-center gap-8 relative z-10">
-        <span className="absolute mt-[3vh] text-xl font-semibold berserker self-center">Sphota</span>
+        <span className="absolute mt-[2vh] text-2xl font-semibold berserker self-center">Sphota</span>
       </div>
       <div className="max-w-6xl mx-auto mb-[9vh] flex flex-col justify-between items-center gap-8 relative z-10">
         {/* Watermark Logos in Row */}
@@ -42,7 +42,7 @@ export default function Footer() {
          
 
         {/* Links */}
-        <div className="flex flex-row  absolute mt-[11vh] md:flex-row gap-4 text-gray-300 text-sm">
+        <div className="flex flex-row  absolute mt-[11vh] md:flex-row gap-9 text-gray-300 text-sm">
           <a href="#home" className="hover:text-white transition">Home</a>
           <a href="#about" className="hover:text-white transition">About</a>
           <a href="#spo" className="hover:text-white transition">Partners</a>
