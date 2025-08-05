@@ -28,7 +28,7 @@ export default function Home() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover z-25 opacity-30"
+          className="absolute inset-0 w-full h-full object-cover z-25 opacity-35"
         >
           <source src="/videos/2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -129,57 +129,115 @@ export default function Home() {
   );
 }
 
-function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
+
+function NavLink({
+  href,
+  children,
+  onClick,
+}: {
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+}) {
   return (
-    <Link
-      href={href}
-      className="tahoma text-white hover:text-blue-300 transition"
-    >
-      {children}
+    <Link href={href} passHref>
+      <span
+        onClick={onClick}
+        className="tahoma text-white hover:text-blue-300 transition cursor-pointer"
+      >
+        {children}
+      </span>
     </Link>
   );
 }
 
 function MobileNav() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLSpanElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
+  const toggleMenu = () => setMenuOpen((prev) => !prev);
 
   useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Node;
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(target)
+      ) {
         setMenuOpen(false);
       }
-    }
+    };
 
     if (menuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [menuOpen]);
 
   return (
-    <div className="md:hidden flex items-center justify-end w-full">
+    <div className="md:hidden flex items-center justify-end w-full relative z-[9999]">
+      {/* Hamburger / X icon */}
       <button
-        className="px-4 py-4 mr-[5vw] text-white text-[3vh]"
-        onClick={() => setMenuOpen(!menuOpen)}
-        aria-label="Open navigation menu"
+        ref={buttonRef}
+        className="relative w-8 h-8 mr-[8vw] mt-[2.5vh] focus:outline-none z-[9999]"
+        onClick={toggleMenu}
+        aria-label="Toggle navigation menu"
       >
-        ☰
-      </button>
-      {menuOpen && (
         <span
-          ref={menuRef}
-          className="absolute top-5 right-0 mr-[15vw] flex flex-col gap-5 bg-black/70 rounded-3xl p-4 z-40 min-w-[150px]"
-        >
-          <NavLink href="/">Home</NavLink>
-          <NavLink href="#about">About</NavLink>
-          <NavLink href="#spo">Sponsers</NavLink>
-          <NavLink href="#time">Timeline</NavLink>
-          <NavLink href="#faq">FAQ&apos;S</NavLink>
-        </span>
+          className={`absolute h-[2px] w-8 bg-white transition-all duration-300 ease-in-out top-0 ${
+            menuOpen ? 'rotate-45 top-2' : ''
+          }`}
+        />
+            <span
+              className={`absolute h-[2px] w-8 bg-white transition-all duration-300 ease-in-out top-2 ${
+                menuOpen ? '-rotate-45 top-2' : ''
+              }`}
+            />
+        <span
+          className={`absolute h-[2px] w-8 bg-white transition-all duration-300 ease-in-out top-4 ${
+            menuOpen ? 'opacity-0' : ''
+          }`}
+        />
+      </button>
+
+      {/* Glassy dark popup */}
+      {menuOpen && (
+        <>
+
+          {/* Menu */}
+          <div
+             ref={menuRef}
+             className="fixed top-50 left-1/2 -translate-x-1/2 -translate-y-1/2 
+             bg-black/60 backdrop-blur-xl border border-white/10 
+             rounded-3xl p-6 z-50 w-[80vw] max-w-xs flex flex-col items-center gap-6 
+             shadow-2xl animate-popupGlass"
+>
+
+            <NavLink href="/" onClick={() => setMenuOpen(false)}>
+              Home
+            </NavLink>
+            <NavLink href="#about" onClick={() => setMenuOpen(false)}>
+              About
+            </NavLink>
+            <NavLink href="#spo" onClick={() => setMenuOpen(false)}>
+              Sponsors
+            </NavLink>
+            <NavLink href="#time" onClick={() => setMenuOpen(false)}>
+              Timeline
+            </NavLink>
+            <NavLink href="#faq" onClick={() => setMenuOpen(false)}>
+              FAQ&apos;s
+            </NavLink>
+          </div>
+        </>
       )}
     </div>
   );
