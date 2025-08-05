@@ -34,18 +34,27 @@ export default function Home() {
           Your browser does not support the video tag.
         </video>
         {/* 🔳 Black filter overlay */}
-<div className="absolute inset-0 bg-black opacity-10 z-60 pointer-events-none" />
+<div className="absolute inset-0 bg-black flex flex-row opacity-10 z-60 pointer-events-none" />
 
         {/* Watermark Logo */}
-        <div className="absolute top-7 left-5 z-20 opacity-85">
-          <Image
-            src="/images/logos.png"
-            alt="Watermark"
-            width={100}
-            height={50}
-            priority
-          />
-        </div>
+       <div className="absolute top-7 left-5 z-20 opacity-85 flex items-center gap-2">
+  <Image
+    src="/images/logos.png"
+    alt="Watermark"
+    width={100}
+    height={50}
+    priority
+  />
+  <Image
+  src="/images/stist.png"
+  alt="Watermark"
+  width={30.25}    // 25% of original width
+  height={15.125} // 25% of original height
+  priority
+/>
+
+</div>
+
 
         {/* Navigation Bar */}
         <nav className="absolute animated animatedFadeInUp fadeInUp top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-3xl px-2 flex justify-center sm:justify-center">
