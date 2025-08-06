@@ -64,7 +64,7 @@ export default function TimeLine() {
     { name: 'Registration Closes',date:'18/08/2025', },
     { name: 'Hackathon Kick-Off',date:'23/08/2025 (10:00 am)', },
     { name: 'Hackathon Ends',date:'24/08/2025 (10:00 am)', },
-    { name: 'Closing Ceremony & Awards',date:'06/08/2025 (10:00 am)', },
+    { name: 'Closing Ceremony & Awards',date:'24/08/2025 (11:00 am)', },
   ];
 
   return (
