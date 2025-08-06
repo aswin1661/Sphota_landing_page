@@ -6,7 +6,7 @@ export default function RegisterPage() {
       <h1 className="text-white text-4xl berserker font-bold mb-6">Sphota Registration</h1>
 
       <iframe
-        src="https://airtable.com/embed/app4i0uLAGQgFXHtS/pag02PKVx51lhmkPR"
+        src="https://airtable.com/embed/applq6fD1AFdFLj66/pagfyeyuKn4iE6rOD/form"
         width="100%"
         height="800"
         frameBorder="0"
