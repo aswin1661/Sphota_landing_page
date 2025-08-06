@@ -127,14 +127,14 @@ export default function TimeLine() {
                 }`}
               >
                 
-                <h2 className={`duration-700 ${
+                <h1 className={`duration-700 text-xs ${
                   isVisible
                     ? isLeft
                       ? 'fade-in-left'
                       : 'fade-in-right'
                     : 'opacity-0' 
-                }`} >{item.date}</h2>
-                <h2  className='mt-[1.5vh]' >{item.name}</h2>
+                }`} >{item.date}</h1>
+                <h2  className='mt-[1.5vh] text-lg font-bold' >{item.name}</h2>
               </div>
             </div>
           );
