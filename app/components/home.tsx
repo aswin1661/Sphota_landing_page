@@ -107,7 +107,7 @@ export default function Home() {
   href="https://drive.usercontent.google.com/u/0/uc?id=1UlHODdaB2sqqjUxGDhJTRUpfpLQhWtCW&export=download"
   target="_blank"
   rel="noopener noreferrer"
-  className="absolute mt-[80vh] text-white text-sm underline z-30 tahoma hover:text-blue-300 transition"
+  className="absolute mt-[80vh] text-white text-sm underline animated animatedFadeInUp fadeInUp z-30 tahoma hover:text-blue-300 transition"
 >
   Be our sponsors
 </a>
