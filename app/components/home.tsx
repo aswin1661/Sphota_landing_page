@@ -37,12 +37,12 @@ export default function Home() {
 <div className="absolute inset-0 bg-black flex flex-row opacity-10 z-60 pointer-events-none" />
 
         {/* Watermark Logo */}
-       <div className="absolute top-7 left-9 z-20 opacity-85 flex items-center gap-2">
+       <div className="absolute top-6 left-9 z-20 opacity-85 flex items-center gap-2">
   <Image
     src="/images/logos.png"
     alt="Watermark"
-    width={100}
-    height={50}
+    width={120}
+    height={62.5}
     priority
   />
 

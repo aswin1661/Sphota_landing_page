@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 
 const partners = [
-  '',
-  '',
-  '',
+   '',
+  '/images/mediaone.jpg',
+  '/images/unibic.png',
   '',
 ];
 
@@ -88,7 +88,7 @@ export default function Partners() {
                   alt={`Partner ${index + 1}`}
                   width={150}
                   height={50}
-                  className="object-contain grayscale hover:grayscale-0 transition duration-300"
+                  className="object-contain transition duration-300"
                 />
               </div>
             ))}
