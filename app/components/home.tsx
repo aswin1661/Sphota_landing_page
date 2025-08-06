@@ -51,7 +51,7 @@ export default function Home() {
 
         {/* Navigation Bar */}
         <nav className="absolute animated animatedFadeInUp fadeInUp top-6 left-1/2 -translate-x-1/2 z-30 w-full max-w-3xl px-2 flex justify-center sm:justify-center">
-          <div className="hidden md:flex gap-10 px-8 py-4 rounded-full">
+          <div className="hidden md:flex gap-10 backdrop-blur-xl px-8 py-4 rounded-full">
             <NavLink href="/">Home</NavLink>
             <NavLink href="#about">About</NavLink>
             <NavLink href="#spo">Sponsers</NavLink>
@@ -104,7 +104,7 @@ export default function Home() {
         </button>
 
         <a
-  href="https://drive.google.com/your-download-link"
+  href="https://drive.usercontent.google.com/u/0/uc?id=1UlHODdaB2sqqjUxGDhJTRUpfpLQhWtCW&export=download"
   target="_blank"
   rel="noopener noreferrer"
   className="absolute mt-[80vh] text-white text-sm underline z-30 tahoma hover:text-blue-300 transition"
