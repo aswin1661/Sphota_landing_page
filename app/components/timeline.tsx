@@ -60,12 +60,11 @@ export default function TimeLine() {
   }, []);
 
   const timelineData = [
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
-    { name: 'Name', text: 'Lorem ipsum dolor sit amet...' },
+    { name: 'Registration Opens',date:'06/08/2025', },
+    { name: 'Registration Closes',date:'18/08/2025', },
+    { name: 'Hackathon Kick-Off',date:'23/08/2025 (10:00 am)', },
+    { name: 'Hackathon Ends',date:'24/08/2025 (10:00 am)', },
+    { name: 'Closing Ceremony & Awards',date:'06/08/2025 (10:00 am)', },
   ];
 
   return (
@@ -119,16 +118,23 @@ export default function TimeLine() {
               className={`container ${isLeft ? 'left' : 'right'}`}
             >
               <div
-                className={`content transition-opacity duration-700 ${
+                className={`content transition-opacity flex flex-col items-center duration-700 ${
                   isVisible
                     ? isLeft
                       ? 'fade-in-left'
                       : 'fade-in-right'
-                    : 'opacity-0'
+                    : 'opacity-0' 
                 }`}
               >
-                <h2>{item.name}</h2>
-                <p>{item.text}</p>
+                
+                <h2 className={`duration-700 ${
+                  isVisible
+                    ? isLeft
+                      ? 'fade-in-left'
+                      : 'fade-in-right'
+                    : 'opacity-0' 
+                }`} >{item.date}</h2>
+                <h2  className='mt-[1.5vh]' >{item.name}</h2>
               </div>
             </div>
           );

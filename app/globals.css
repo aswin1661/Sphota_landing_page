@@ -293,6 +293,26 @@ html{
   box-sizing: border-box;
 }
 
+.circle-bullet li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+  list-style: none;
+}
+
+.circle-bullet li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  width: 0.75em;
+  height: 0.75em;
+  border: 2px solid white;
+  border-radius: 9999px; /* makes it a perfect circle */
+  background-color: transparent;
+}
+
+
 @keyframes fadeInLeft {
   0% {
     opacity: 0;

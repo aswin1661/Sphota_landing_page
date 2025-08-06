@@ -4,10 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 
 const partners = [
-   '',
   '/images/mediaone.jpg',
   '/images/unibic.png',
-  '',
 ];
 
 export default function Partners() {

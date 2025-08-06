@@ -91,10 +91,11 @@ export default function About() {
 
           {/* Bullet list */}
           <ul
-            className={`square-bullet mt-[1vh] text-white tahoma mr-[5vw] ml-[5vw] text-sm lg:text-base text-left max-w-md ${
-              isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
-            }`}
-          >
+  className={`circle-bullet mt-[1vh] text-white tahoma mr-[5vw] ml-[5vw] text-sm lg:text-base text-left max-w-md ${
+    isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
+  }`}
+>
+
             <li>Organized by IEEE SB UCEK & IEEE SB STIST.</li>
             <li>24-hour in-person hackathon.</li>
             <li>Teams of 2 to 4.</li>
