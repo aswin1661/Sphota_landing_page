@@ -1,5 +1,0 @@
-8/6 reg
-18 cl
-23 start 10.00
-24 end
-24 10.00 conclude
