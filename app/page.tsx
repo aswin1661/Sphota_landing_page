@@ -44,7 +44,7 @@ export default function Page() {
         )
       );
 
-      // ✅ Add 2 second delay after assets are loaded
+      // Add 2 second delay after assets are loaded
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       setIsLoading(false);

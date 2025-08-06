@@ -72,26 +72,24 @@ export default function About() {
         </h3>
 
         {/* Responsive row */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full gap-8 mt-6 z-10">
+        <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center w-full  mt-6 z-10">
           {/* Image */}
           <div
-            className={`flex-shrink-0 ${
+            className={`flex-shrink-0 ml-[2vw] ${
               isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
             }`}
           >
             <Image
-              src="/images/image.jpg"
+              src="/images/sphotalogo.png"
               alt="Watermark"
-              width={252}
-              height={158}
-              min-width={125}
-              min-height={79}
+              width={156.25}
+              height={98.75}
             />
           </div>
 
           {/* Bullet list */}
           <ul
-  className={`circle-bullet mt-[1vh] text-white tahoma mr-[5vw] ml-[5vw] text-sm lg:text-base text-left max-w-md ${
+  className={`circle-bullet mt-[4vh] text-white tahoma mr-[5vw] ml-[5vw] text-sm lg:text-base text-left max-w-md ${
     isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
   }`}
 >

@@ -78,7 +78,7 @@ export default function Home() {
 ></div>
 
         {/* Heading */}
-        <h1 className="absolute pt-[23vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md z-30">
+        <h1 className="absolute pt-[22vh] berserker text-5xl animated animatedFadeInUp fadeInUp text-white drop-shadow-md z-30">
           SPHOTA
         </h1>
 
