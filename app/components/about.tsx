@@ -82,7 +82,7 @@ export default function About() {
             <Image
   src="/images/sphotalogo.png"
   alt="Watermark"
-  className="brightness-150 float"
+  className="brightness-170 float"
   width={156.25}
   height={98.75}
 />
