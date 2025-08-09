@@ -77,6 +77,7 @@ export default function TimeLine() {
       <div
         className="absolute inset-0 z-1  pointer-events-none"
         style={{
+        
           background:
             'linear-gradient(to bottom, black 0%, rgba(0,0,0,0.85) 15%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 70%, rgba(0, 0, 0, 1) 100%)',
         }}
