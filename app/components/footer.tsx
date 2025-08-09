@@ -55,6 +55,7 @@ export default function Footer() {
             © {year} Sphota. All rights reserved.
           </div>
         )}
+        <div className='w-screen h-[1vh]'></div>
       </div>
     </footer>
   );

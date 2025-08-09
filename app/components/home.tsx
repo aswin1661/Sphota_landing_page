@@ -104,7 +104,7 @@ export default function Home() {
         </button>
 
         <a
-  href="https://drive.usercontent.google.com/u/0/uc?id=1UlHODdaB2sqqjUxGDhJTRUpfpLQhWtCW&export=download"
+  href="/register"
   target="_blank"
   rel="noopener noreferrer"
   className="absolute mt-[80vh] text-white text-sm underline animated animatedFadeInUp fadeInUp z-30 tahoma hover:text-blue-300 transition"
