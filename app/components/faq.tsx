@@ -56,7 +56,7 @@ export default function FAQ() {
       <div
         ref={sectionRef}
         className={`absolute flex w-screen h-screen items-center overflow-hidden flex-col justify-center bg-cover bg-center  `}
-        style={{ backgroundImage: "url('/images/faq.jpeg')" }}
+        style={{ backgroundImage: "url('/images/webp/faq.webp')" }}
       >
        
               <div

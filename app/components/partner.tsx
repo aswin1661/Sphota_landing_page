@@ -4,8 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 
 const partners = [
-  '/images/mediaone.jpg',
-  '/images/unibic.png',
+  '/images/webp/mediaone.webp',
+  '/images/webp/unibic.webp',
 ];
 
 export default function Partners() {
@@ -39,7 +39,7 @@ export default function Partners() {
         className={`relative flex w-full min-h-[100dvh] overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
           isVisible ? 'opacity-100' : 'opacity-0'
         }`}
-        style={{ backgroundImage: "url('/images/partners.jpeg')" }}
+        style={{ backgroundImage: "url('/images/webp/partners.webp')" }}
       >
         
         {/* Video overlay */}

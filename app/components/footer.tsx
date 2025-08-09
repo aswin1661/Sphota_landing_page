@@ -25,7 +25,7 @@ export default function Footer() {
             className="object-contain invert"
           />
           <Image
-              src="/images/logos.png"
+              src="/images/webp/logos.webp"
               alt="Sphota Logo"
               width={120}
               height={75}

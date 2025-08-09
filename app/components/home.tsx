@@ -19,7 +19,7 @@ export default function Home() {
       {/* Background section */}
       <section
         className="relative flex w-full h-screen items-center justify-center bg-cover bg-center transition-opacity duration-700"
-        style={{ backgroundImage: "url('/images/home.jpeg')" }}
+        style={{ backgroundImage: "url('/images/webp/home.webp')" }}
       >
 
         {/* Video overlay */}
@@ -39,7 +39,7 @@ export default function Home() {
         {/* Watermark Logo */}
        <div className="absolute top-6 left-9 z-20 opacity-100 flex items-center gap-2">
   <Image
-    src="/images/logos.png"
+    src="/images/webp/logos.webp"
     alt="Watermark"
     width={120}
     height={62.5}
