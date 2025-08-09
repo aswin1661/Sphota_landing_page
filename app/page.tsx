@@ -1,5 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import About from './components/about';
 import FAQ from './components/faq';
@@ -11,49 +12,28 @@ import Loader from './components/Loading';
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(false); // loader for route changes
+  const pathname = usePathname(); // track route changes
 
+  // Initial media preload
   useEffect(() => {
     const preloadMedia = async () => {
-      const mediaUrls: string[] = [
-        '/images/bg-home.jpg',
-        '/images/bg-about.jpg',
-        '/videos/intro.mp4',
-        // Add more if needed
-      ];
-
-      const preloadImage = (url: string): Promise<void> =>
-        new Promise((resolve) => {
-          const img = new Image();
-          img.src = url;
-          img.onload = () => resolve();
-          img.onerror = () => resolve(); // Avoid breaking load if image fails
-        });
-
-      const preloadVideo = (url: string): Promise<void> =>
-        new Promise((resolve) => {
-          const video = document.createElement('video');
-          video.src = url;
-          video.onloadeddata = () => resolve();
-          video.onerror = () => resolve();
-        });
-
-      // Wait for all media to preload
-      await Promise.all(
-        mediaUrls.map((url) =>
-          url.endsWith('.mp4') ? preloadVideo(url) : preloadImage(url)
-        )
-      );
-
-      // Add 2 second delay after assets are loaded
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
+      await new Promise((resolve) => setTimeout(resolve, 2500)); // simulate preload
       setIsLoading(false);
     };
-
     preloadMedia();
   }, []);
 
-  if (isLoading) {
+  // Route change detection
+  useEffect(() => {
+    if (!isLoading) {
+      setLoading(true);
+      const timer = setTimeout(() => setLoading(false), 1000); // delay for loader animation
+      return () => clearTimeout(timer);
+    }
+  }, [pathname, isLoading]);
+
+  if (isLoading || loading) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <Loader />
