@@ -12,13 +12,13 @@ import Loader from './components/Loading';
 
 export default function Page() {
   const [isLoading, setIsLoading] = useState(true);
-  const [loading, setLoading] = useState(false); // loader for route changes
-  const pathname = usePathname(); // track route changes
+  const [loading, setLoading] = useState(false); 
+  const pathname = usePathname(); 
 
   // Initial media preload
   useEffect(() => {
     const preloadMedia = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2500)); // simulate preload
+      await new Promise((resolve) => setTimeout(resolve, 2500)); 
       setIsLoading(false);
     };
     preloadMedia();
@@ -28,7 +28,7 @@ export default function Page() {
   useEffect(() => {
     if (!isLoading) {
       setLoading(true);
-      const timer = setTimeout(() => setLoading(false), 1000); // delay for loader animation
+      const timer = setTimeout(() => setLoading(false), 1000); 
       return () => clearTimeout(timer);
     }
   }, [pathname, isLoading]);
