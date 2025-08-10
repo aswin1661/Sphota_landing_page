@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { preloadAssets } from "./assetsList";
+import usePreloadAssets from "./hooks/usePreloadAssests";
 
 import About from './components/about';
 import FAQ from './components/faq';
@@ -8,47 +8,27 @@ import Footer from './components/footer';
 import Home from './components/home';
 import Partners from './components/partner';
 import Timeline from './components/timeline';
-import Loader from './components/Loading';
+import Loading from "./loading";
 
 export default function Page() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [loading, setLoading] = useState(false); 
-  const pathname = usePathname(); 
-
-  // Initial media preload
-  useEffect(() => {
-    const preloadMedia = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 2500)); 
-      setIsLoading(false);
-    };
-    preloadMedia();
-  }, []);
-
-  // Route change detection
-  useEffect(() => {
-    if (!isLoading) {
-      setLoading(true);
-      const timer = setTimeout(() => setLoading(false), 1000); 
-      return () => clearTimeout(timer);
-    }
-  }, [pathname, isLoading]);
-
-  if (isLoading || loading) {
-    return (
-      <div className="h-screen w-screen flex items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
+    const isLoaded = usePreloadAssets(preloadAssets, 500); // extra 500ms delay for smoothness
 
   return (
-    <div>
-      <Home />
-      <About />
-      <Timeline />
-      <FAQ />
-      <Partners />
-      <Footer />
-    </div>
+     <>
+      {!isLoaded ? (
+        <div className="loader">
+          <Loading hidden={isLoaded} />
+        </div>
+      ) : (
+        <>
+           <Home />
+           <About />
+           <Timeline />
+           <FAQ />
+           <Partners />
+           <Footer />
+        </>
+      )}
+    </>
   );
 }

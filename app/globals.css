@@ -7,6 +7,22 @@ html{
   overflow-x:hidden;
 }
 
+.loader {
+  position: fixed;
+  inset: 0;
+  background: #000; /* match your theme */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.6s ease;
+}
+
+.loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .cinzel-decorative-regular {
   font-family: "Cinzel Decorative", serif;
   font-weight: 400;

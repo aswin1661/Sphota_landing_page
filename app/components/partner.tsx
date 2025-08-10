@@ -36,8 +36,8 @@ export default function Partners() {
       {/* Background */}
       <div
         ref={sectionRef}
-        className={`relative flex w-full min-h-[100dvh] overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-700 ${
-          isVisible ? 'opacity-100' : 'opacity-0'
+        className={`relative flex w-full min-h-[100dvh] overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-200 ${
+          isVisible ? 'opacity-100' : 'opacity-50'
         }`}
         style={{ backgroundImage: "url('/images/webp/partners.webp')" }}
       >
