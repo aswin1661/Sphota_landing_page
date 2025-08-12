@@ -37,7 +37,7 @@ export default function Partners() {
       <div
         ref={sectionRef}
         className={`relative flex w-full min-h-[100dvh] overflow-hidden items-center flex-col justify-center bg-cover bg-center transition-opacity duration-200 ${
-          isVisible ? 'opacity-100' : 'opacity-50'
+          isVisible ? 'opacity-100' : 'opacity-80'
         }`}
         style={{ backgroundImage: "url('/images/webp/partners.webp')" }}
       >
@@ -78,8 +78,8 @@ export default function Partners() {
               <div
                 key={index}
                 className={`${
-                  isVisible ? 'animate-fade-in-up' : 'opacity-0'
-                } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition duration-300`}
+                  isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
+                } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition duration-200`}
               >
                 <Image
                   src={logo}
