@@ -1,51 +1,48 @@
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect } from 'react';
+import Link from "next/link";
 import LogoutButton from "@/app/admin/LogoutButton";
-import { TeamDetailsModal } from './TeamDetailsModal';
+import { TeamDetailsModal } from '../participants/TeamDetailsModal';
+import type { TeamDetails } from '../participants/TeamDetailsModal';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
-interface Participant {
-    name: string;
+interface Team {
     teamName: string;
-    isLead: boolean;
-    recordFields?: Record<string, string | number | boolean | null>;
+    recordFields: TeamDetails;
 }
 
-export default function ParticipantsPage() {
-    const [selectedTeamDetails, setSelectedTeamDetails] = useState<Record<string, string | number | boolean | null> | null>(null);
+export default function TeamsPage() {
+    const [selectedTeamDetails, setSelectedTeamDetails] = useState<TeamDetails | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [participants, setParticipants] = useState<Participant[]>([]);
+    const [teams, setTeams] = useState<Team[]>([]);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchParticipants() {
+        async function fetchTeams() {
             try {
-                const response = await fetch('/api/participants');
+                const response = await fetch('/api/teams');
                 const data = await response.json();
                 
                 if (data.error) {
                     setError(data.error);
                 } else {
-                    setParticipants(data.participants);
+                    setTeams(data.teams);
                 }
             } catch {
-                setError('Failed to fetch participants');
+                setError('Failed to fetch teams');
             } finally {
                 setIsLoading(false);
             }
         }
 
-        fetchParticipants();
+        fetchTeams();
     }, []);
 
-    const handleParticipantClick = (recordFields: Record<string, string | number | boolean | null> | undefined) => {
-        if (recordFields) {
-            setSelectedTeamDetails(recordFields);
-            setIsModalOpen(true);
-        }
+    const handleTeamClick = (recordFields: TeamDetails) => {
+        setSelectedTeamDetails(recordFields);
+        setIsModalOpen(true);
     };
 
     return (
@@ -53,8 +50,8 @@ export default function ParticipantsPage() {
             <div className="mx-auto max-w-6xl px-8 py-14">
                 <header className="flex items-center justify-between mb-10">
                     <div>
-                        <h1 className="text-4xl font-extrabold tracking-tight text-white">Participants</h1>
-                        <p className="mt-1 text-base text-zinc-300">View all registered team members</p>
+                        <h1 className="text-4xl font-extrabold tracking-tight text-white">Teams</h1>
+                        <p className="mt-1 text-base text-zinc-300">View all registered teams</p>
                     </div>
                     
                     <div className="flex items-center gap-4">
@@ -72,10 +69,10 @@ export default function ParticipantsPage() {
                     <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
                         <div className="flex items-center justify-between mb-6">
                             <h2 className="text-xl font-semibold text-white">
-                                Registered Members
+                                Registered Teams
                             </h2>
                             <p className="text-sm text-zinc-400">
-                                Total: {participants.length}
+                                Total: {teams.length}
                             </p>
                         </div>
                         
@@ -85,33 +82,36 @@ export default function ParticipantsPage() {
                             <div className="text-center py-6 bg-red-500/10 rounded-lg border border-red-500/20">
                                 <p className="text-red-400">{error}</p>
                             </div>
-                        ) : participants.length > 0 ? (
+                        ) : teams.length > 0 ? (
                             <ul className="divide-y divide-white/10">
-                                {participants.map((participant, index) => (
+                                {teams.map((team, index) => (
                                     <li 
                                         key={index} 
-                                        className="py-4 flex items-center justify-between cursor-pointer hover:bg-white/5 px-4 -mx-4 rounded-lg transition-colors"
-                                        onClick={() => handleParticipantClick(participant.recordFields)}
+                                        onClick={() => handleTeamClick(team.recordFields)}
+                                        className="py-4 px-4 flex items-center justify-between cursor-pointer hover:bg-white/5 rounded-lg transition-colors"
                                     >
                                         <span className="text-zinc-100 hover:text-white">
-                                            {participant.name}
+                                            {team.teamName}
                                         </span>
-                                        <div className="flex items-center gap-3">
-                                            <span className="px-2 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-zinc-400">
-                                                {participant.teamName}
-                                            </span>
-                                            {participant.isLead && (
-                                                <span className="px-2 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                                                    Lead
-                                                </span>
-                                            )}
-                                        </div>
+                                        <svg 
+                                            className="w-5 h-5 text-zinc-400" 
+                                            fill="none" 
+                                            stroke="currentColor" 
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path 
+                                                strokeLinecap="round" 
+                                                strokeLinejoin="round" 
+                                                strokeWidth={2} 
+                                                d="M9 5l7 7-7 7"
+                                            />
+                                        </svg>
                                     </li>
                                 ))}
                             </ul>
                         ) : (
                             <div className="text-center py-12">
-                                <p className="text-zinc-500">No participants registered yet.</p>
+                                <p className="text-zinc-500">No teams registered yet.</p>
                             </div>
                         )}
                     </div>

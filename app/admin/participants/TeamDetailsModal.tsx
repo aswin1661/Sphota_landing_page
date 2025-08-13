@@ -8,7 +8,7 @@ interface Attachment {
   type: string;
 }
 
-interface TeamDetails {
+export interface TeamDetails {
   "Team Name"?: string;
   [key: string]: string | number | boolean | Attachment[] | unknown[] | Record<string, unknown> | null | undefined;
 }
