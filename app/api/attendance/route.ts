@@ -95,7 +95,7 @@ export async function PUT(request: Request) {
             );
         }
 
-        const fieldsToUpdate: Record<string, any> = {};
+        const fieldsToUpdate: Record<string, string | boolean> = {};
 
         // Handle attendance update
         if (attendance !== undefined) {

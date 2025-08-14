@@ -27,7 +27,7 @@ export async function GET() {
             isLead: boolean;
         }> = [];
 
-        records.forEach((record: any) => {
+        records.forEach((record: Airtable.Record<Airtable.FieldSet>) => {
             const fields = record.fields;
             const teamName = fields['Team Name'] as string || 'Unnamed Team';
             const lead = fields['Lead'] as string;

@@ -15,7 +15,7 @@ import {
 
 interface TeamRecord {
     recordId: string;
-    fields: Record<string, any>;
+    fields: Record<string, string | boolean | undefined>;
     teamName: string;
 }
 
@@ -24,8 +24,6 @@ export default function AttendancePage() {
     const [error, setError] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
-    const [verifyingId, setVerifyingId] = useState<string | null>(null);
-    const [selectedTeam, setSelectedTeam] = useState<TeamRecord | null>(null);
 
     useEffect(() => {
         async function fetchData() {
@@ -84,52 +82,6 @@ export default function AttendancePage() {
         }
     };
 
-    const updateVerification = async (recordId: string, verified: boolean) => {
-        setVerifyingId(recordId);
-        try {
-            const response = await fetch('/api/attendance', {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    recordId,
-                    verified
-                })
-            });
-
-            const data = await response.json();
-            
-            if (data.success) {
-                // Update the local state
-                setTeamRecords(prev => 
-                    prev.map(record => 
-                        record.recordId === recordId 
-                            ? { ...record, fields: { ...record.fields, Verified: verified ? 'Verified' : '' } }
-                            : record
-                    )
-                );
-            } else {
-                alert('Failed to update verification: ' + data.error);
-            }
-        } catch (err) {
-            console.error('Error updating verification:', err);
-            alert('Failed to update verification');
-        } finally {
-            setVerifyingId(null);
-        }
-    };
-
-    const getAttendanceStats = () => {
-        const presentCount = teamRecords.filter(record => record.fields['Attendance'] === 'Present').length;
-        const absentCount = teamRecords.filter(record => record.fields['Attendance'] === 'Absent').length;
-        const notSetCount = teamRecords.filter(record => !record.fields['Attendance']).length;
-        const verifiedCount = teamRecords.filter(record => record.fields['Verified'] === 'Verified').length;
-        const unverifiedCount = teamRecords.length - verifiedCount;
-        
-        return { presentCount, absentCount, notSetCount, verifiedCount, unverifiedCount, total: teamRecords.length };
-    };
-
     const getAllTeamMembers = (team: TeamRecord) => {
         const members = [];
         
@@ -154,8 +106,6 @@ export default function AttendancePage() {
         
         return members;
     };
-
-    const stats = getAttendanceStats();
 
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
@@ -201,7 +151,6 @@ export default function AttendancePage() {
                                     const attendance = team.fields['Attendance'] as string || 'Not Set';
                                     const isVerified = team.fields['Verified'] === 'Verified';
                                     const isUpdating = updatingId === team.recordId;
-                                    const isVerifying = verifyingId === team.recordId;
                                     const allMembers = getAllTeamMembers(team);
                                     
                                     return (

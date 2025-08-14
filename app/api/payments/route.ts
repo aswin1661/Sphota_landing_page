@@ -17,7 +17,7 @@ export async function GET() {
         
 
         
-        const payments = records.map((record: any) => {
+        const payments = records.map((record: Airtable.Record<Airtable.FieldSet>) => {
             const fields = record.fields;
             
             // Extract attachment information if available
@@ -87,7 +87,7 @@ export async function PUT(request: Request) {
 
         // Update the "Verified" dropdown field
         // Set to "Verified" when verifying, or undefined when unverifying
-        const updateData: any = {};
+        const updateData: Record<string, string> = {};
         if (isVerified) {
             updateData['Verified'] = 'Verified';
         } else {
@@ -102,8 +102,9 @@ export async function PUT(request: Request) {
                 success: true, 
                 message: `Payment ${isVerified ? 'verified' : 'unverified'} successfully` 
             });
-        } catch (error: any) {
-            if (error.error === 'UNKNOWN_FIELD_NAME') {
+        } catch (error: unknown) {
+            const airtableError = error as { error?: string };
+            if (airtableError.error === 'UNKNOWN_FIELD_NAME') {
                 // If "Verified" field doesn't exist, track locally
                 console.log('No "Verified" dropdown field found in Airtable, tracking locally');
                 return NextResponse.json({ 

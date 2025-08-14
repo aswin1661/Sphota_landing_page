@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export default function Countdown({ targetDate }: { targetDate: string }) {
-  const calculateTimeLeft = () => {
+  const calculateTimeLeft = useCallback(() => {
     const now = new Date().getTime();
     const target = new Date(targetDate).getTime();
     const difference = target - now;
@@ -17,7 +17,7 @@ export default function Countdown({ targetDate }: { targetDate: string }) {
     const seconds = Math.floor((difference / 1000) % 60);
 
     return { days, hours, minutes, seconds };
-  };
+  }, [targetDate]);
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -27,7 +27,7 @@ export default function Countdown({ targetDate }: { targetDate: string }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [calculateTimeLeft]);
 
   return (
     <div className="font-mono text-white text-lg sm:text-md md:text-lg lg:text-xl">

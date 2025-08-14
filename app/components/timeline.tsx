@@ -17,12 +17,13 @@ export default function TimeLine() {
         }
       );
   
-      if (sectionRef.current) {
-        observer.observe(sectionRef.current);
+      const currentSection = sectionRef.current;
+      if (currentSection) {
+        observer.observe(currentSection);
       }
   
       return () => {
-        if (sectionRef.current) observer.unobserve(sectionRef.current);
+        if (currentSection) observer.unobserve(currentSection);
       };
     }, []);
   useEffect(() => {
@@ -48,12 +49,13 @@ export default function TimeLine() {
       { threshold: 0.3 }
     );
 
-    sectionRefs.current.forEach((ref) => {
+    const currentSectionRefs = sectionRefs.current;
+    currentSectionRefs.forEach((ref) => {
       if (ref) observer.observe(ref);
     });
 
     return () => {
-      sectionRefs.current.forEach((ref) => {
+      currentSectionRefs.forEach((ref) => {
         if (ref) observer.unobserve(ref);
       });
     };
