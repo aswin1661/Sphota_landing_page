@@ -118,7 +118,7 @@ export default function PaymentPage() {
                 <header className="flex items-center justify-between mb-10">
                     <div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-white">Payment Information</h1>
-                        <p className="mt-1 text-base text-zinc-300">View UPI transaction IDs and payment attachments</p>
+                        <p className="mt-1 text-base text-zinc-300"></p>
                     </div>
                     
                     <div className="flex items-center gap-4">

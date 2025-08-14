@@ -54,7 +54,7 @@ export default function ParticipantsPage() {
                 <header className="flex items-center justify-between mb-10">
                     <div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-white">Participants</h1>
-                        <p className="mt-1 text-base text-zinc-300">View all registered team members</p>
+                        <p className="mt-1 text-base text-zinc-300"></p>
                     </div>
                     
                     <div className="flex items-center gap-4">

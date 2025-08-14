@@ -53,7 +53,7 @@ export default function FoodPreferencesPage() {
                 <header className="flex items-center justify-between mb-10">
                     <div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-white">Food Preferences</h1>
-                        <p className="mt-1 text-base text-zinc-300">View dietary preferences overview</p>
+                        <p className="mt-1 text-base text-zinc-300"></p>
                     </div>
                     
                     <div className="flex items-center gap-4">

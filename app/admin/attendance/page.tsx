@@ -113,7 +113,7 @@ export default function AttendancePage() {
                 <header className="flex items-center justify-between mb-10">
                     <div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-white">Attendance</h1>
-                        <p className="mt-1 text-base text-zinc-300">Mark team attendance</p>
+                        <p className="mt-1 text-base text-zinc-300"></p>
                     </div>
                     
                     <div className="flex items-center gap-4">

@@ -5,7 +5,7 @@ import React from "react";
 const faqs = [
   {
     question: 'What is Sphota?',
-    answer: 'SPHOTA is a 24-hour offline hackathon organized by IEEE SB UCEK and IEEE SB STIST. It brings engineering students from across Kerala for a Celebration of creativity, code, and collaboration',
+    answer: 'SPHOTA is a 24-hour offline hackathon organized by IEEE SB UCEK and IEEE SB STIST. It brings college students from across Kerala for a Celebration of creativity, code, and collaboration',
   },
   {
     question: 'Who can participate in Sphota events?',
