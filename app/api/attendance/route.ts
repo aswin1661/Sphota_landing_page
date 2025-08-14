@@ -85,7 +85,7 @@ export async function GET() {
 // PUT - Update attendance or verification for a specific record
 export async function PUT(request: Request) {
     try {
-        const body = await request.json();
+        const body: { recordId?: string; attendance?: string; verified?: boolean } = await request.json();
         const { recordId, attendance, verified } = body;
 
         if (!recordId) {
