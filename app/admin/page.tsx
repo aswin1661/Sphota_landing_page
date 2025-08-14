@@ -1,16 +1,9 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import LogoutButton from "@/app/admin/LogoutButton";
 
 
 export default async function AdminPanel() {
-    const cookieStore = await cookies();
-    const isAuthed = cookieStore.get("admin_auth");
-    if (!isAuthed?.value) redirect("/admin/login");
-
-
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
             <div className="mx-auto max-w-6xl px-8 py-14">
@@ -28,11 +21,11 @@ export default async function AdminPanel() {
                     </div>
                 </header>
 
-                <main className="mt-14 grid-cols-1 gap-8 flex justify-center md:grid-cols-3">
+                <main className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
                     <section className="col-span-2 rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
                         <h2 className="text-xl font-semibold text-white">Dashboard</h2>
                         <p className="mt-1 text-base text-zinc-300">
-                            Ouick access
+                            Quick access
                         </p>
 
                         <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2">
@@ -56,10 +49,32 @@ export default async function AdminPanel() {
                             </div>
                         </div>
                     </section>
+
+                    <aside className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
+                        <h2 className="text-lg font-semibold text-white">Quick Links</h2>
+                        <p className="mt-1 text-sm text-zinc-300">Quick access to common pages</p>
+
+                        <div className="mt-4 flex flex-col gap-3">
+                            <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
+                                <Link href="/admin/attendance">Attendance</Link>
+                            </Button>
+
+                            <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
+                                <Link href="/admin/food-preferences">Food Preferences</Link>
+                            </Button>
+
+                            <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
+                                <Link href="/admin/payment">Payment ID</Link>
+                            </Button>
+                            <div className="pt-2">
+                                <LogoutButton />
+                            </div>
+                        </div>
+                    </aside>
                 </main>
 
                 <footer className="mt-16 text-center text-sm text-zinc-500">
-                    Secure area · Logged in
+                Sphota Admin . Logged in
                 </footer>
             </div>
         </div>
