@@ -256,7 +256,7 @@ export default function PaymentPage() {
                                                                 <Button
                                                                     variant="outline"
                                                                     size="sm"
-                                                                    className="text-blue-400 border-blue-500/30 hover:bg-blue-500/10"
+                                                                    className="text-white bg-gray-900 border-blue-500/30 hover:bg-blue-500/10"
                                                                     asChild
                                                                 >
                                                                     <a 
@@ -278,7 +278,7 @@ export default function PaymentPage() {
                                                                 className={`${
                                                                     payment.isVerified 
                                                                         ? 'bg-blue-600 hover:bg-blue-600 text-white cursor-not-allowed opacity-75'
-                                                                        : 'text-blue-400 border-blue-500/30 hover:bg-blue-500/10'
+                                                                        : 'text-black border-green-500/30 hover:text-white hover:bg-blue-500/10'
                                                                 }`}
                                                                 onClick={() => handleVerificationToggle(payment.recordId, payment.isVerified || false)}
                                                             >
