@@ -111,17 +111,17 @@ export default function AttendancePage() {
 
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
-            <div className="mx-auto max-w-6xl px-8 py-14">
-                <header className="flex items-center justify-between mb-10">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-14">
+                <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 lg:mb-10 gap-4">
                     <div>
-                        <h1 className="text-4xl font-extrabold tracking-tight text-white">Attendance</h1>
-                        <p className="mt-1 text-base text-zinc-300"></p>
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">Attendance</h1>
+                        <p className="mt-1 text-sm sm:text-base text-zinc-300"></p>
                     </div>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4">
                         <Link 
                             href="/admin" 
-                            className="text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
+                            className="text-sm sm:text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
                         >
                             Back to Admin
                         </Link>
@@ -131,9 +131,9 @@ export default function AttendancePage() {
 
                 <main>
 
-                    <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-                        <div className="flex items-center justify-between mb-6">
-                            <h2 className="text-xl font-semibold text-white">
+                    <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 lg:p-8 backdrop-blur">
+                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+                            <h2 className="text-lg sm:text-xl font-semibold text-white">
                                 Team Attendance
                             </h2>
                             <p className="text-sm text-zinc-400">
@@ -164,27 +164,27 @@ export default function AttendancePage() {
                                     return (
                                         <div 
                                             key={index} 
-                                            className="flex items-center justify-between p-4 rounded-lg border border-white/10 bg-white/5"
+                                            className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 rounded-lg border border-white/10 bg-white/5 gap-4"
                                         >
                                             <Dialog>
                                                 <DialogTrigger asChild>
-                                                    <div className="flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 rounded transition-colors flex-1">
-                                                        <div>
-                                                            <div className="text-zinc-100 font-medium flex items-center gap-2">
-                                                                {team.teamName}
+                                                    <div className="flex items-center gap-4 cursor-pointer hover:bg-white/5 p-2 rounded transition-colors flex-1 w-full sm:w-auto">
+                                                        <div className="min-w-0 flex-1">
+                                                            <div className="text-zinc-100 font-medium flex flex-col sm:flex-row sm:items-center gap-2">
+                                                                <span className="break-words">{team.teamName}</span>
                                                                 <span className="text-xs text-zinc-500">
                                                                     (Click to view members)
                                                                 </span>
                                                             </div>
-                                                            <div className="flex items-center gap-2 mt-1">
-                                                                <span className="px-2 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-zinc-400">
+                                                            <div className="flex flex-wrap items-center gap-2 mt-2">
+                                                                <span className="px-2 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-zinc-400 whitespace-nowrap">
                                                                     {allMembers.length} member{allMembers.length !== 1 ? 's' : ''}
                                                                 </span>
-                                                                <span className="text-xs text-zinc-500">
+                                                                <span className="text-xs text-zinc-500 break-words">
                                                                     Lead: {team.fields['Lead'] as string || 'N/A'}
                                                                 </span>
                                                                 {isVerified && (
-                                                                    <span className={`px-2 py-1 text-xs rounded-full border bg-green-500/10 border-green-500/20 text-green-400`}>
+                                                                    <span className={`px-2 py-1 text-xs rounded-full border bg-green-500/10 border-green-500/20 text-green-400 whitespace-nowrap`}>
                                                                         Verified
                                                                     </span>
                                                                 )}
@@ -192,24 +192,24 @@ export default function AttendancePage() {
                                                         </div>
                                                     </div>
                                                 </DialogTrigger>
-                                                <DialogContent className="bg-slate-900 border-white/10 text-white">
+                                                <DialogContent className="bg-slate-900 border-white/10 text-white max-w-[95vw] sm:max-w-lg mx-4">
                                                     <DialogHeader>
-                                                        <DialogTitle className="text-xl font-semibold text-white">
+                                                        <DialogTitle className="text-lg sm:text-xl font-semibold text-white break-words">
                                                             {team.teamName} - Team Members
                                                         </DialogTitle>
                                                     </DialogHeader>
-                                                    <div className="mt-4">
+                                                    <div className="mt-4 max-h-[70vh] overflow-y-auto">
                                                         <div className="space-y-3">
                                                             {allMembers.map((member, memberIndex) => (
                                                                 <div 
                                                                     key={memberIndex}
-                                                                    className="flex items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5"
+                                                                    className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5 gap-2 sm:gap-3"
                                                                 >
-                                                                    <div className="flex items-center gap-3">
-                                                                        <div className="text-zinc-100 font-medium">
+                                                                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                                                                        <div className="text-zinc-100 font-medium break-words">
                                                                             {member.name}
                                                                         </div>
-                                                                        <span className={`px-2 py-1 text-xs rounded-full ${
+                                                                        <span className={`px-2 py-1 text-xs rounded-full whitespace-nowrap ${
                                                                             member.role === 'Lead' 
                                                                                 ? 'bg-blue-500/10 border border-blue-500/20 text-blue-400'
                                                                                 : 'bg-white/5 border border-white/10 text-zinc-400'
@@ -250,9 +250,10 @@ export default function AttendancePage() {
                                                 </DialogContent>
                                             </Dialog>
                                             
-                                            <div className="flex items-center gap-3">
-                                                <div className="text-sm text-zinc-400 min-w-[80px]">
-                                                    Status: <span className={`font-medium ${
+                                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+                                                <div className="text-sm text-zinc-400 min-w-0">
+                                                    <span className="block sm:inline">Status: </span>
+                                                    <span className={`font-medium ${
                                                         attendance === 'Present' ? 'text-green-400' :
                                                         attendance === 'Absent' ? 'text-red-400' :
                                                         'text-yellow-400'
@@ -261,13 +262,13 @@ export default function AttendancePage() {
                                                     </span>
                                                 </div>
                                                 
-                                                <div className="flex gap-2">
+                                                <div className="flex gap-2 w-full sm:w-auto">
                                                     <Button
                                                         size="sm"
                                                         variant="outline"
                                                         disabled={isUpdating}
                                                         onClick={() => updateAttendance(team.recordId, 'Present')}
-                                                        className={`h-8 text-xs ${
+                                                        className={`h-8 text-xs flex-1 sm:flex-none ${
                                                             attendance === 'Present' 
                                                                 ? 'bg-green-500/20 border-green-500/50 text-green-400' 
                                                                 : 'bg-green-500/40 hover:bg-green-500/10 hover:border-green-500/30 hover:text-green-400'
@@ -280,7 +281,7 @@ export default function AttendancePage() {
                                                         variant="outline"
                                                         disabled={isUpdating}
                                                         onClick={() => updateAttendance(team.recordId, 'Absent')}
-                                                        className={`h-8 text-xs ${
+                                                        className={`h-8 text-xs flex-1 sm:flex-none ${
                                                             attendance === 'Absent' 
                                                                 ? 'bg-red-500/20 border-red-500/50 text-red-400' 
                                                                 : 'bg-red-500/40 hover:bg-red-500/10 hover:border-red-500/30 hover:text-red-400'
@@ -302,7 +303,7 @@ export default function AttendancePage() {
                     </div>
                 </main>
 
-                <footer className="mt-16 text-center text-sm text-zinc-500">
+                <footer className="mt-8 sm:mt-12 lg:mt-16 text-center text-sm text-zinc-500">
                     Secure area · Logged in
                 </footer>
             </div>
