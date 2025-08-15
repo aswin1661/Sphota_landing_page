@@ -1,9 +1,49 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import LogoutButton from "@/app/admin/LogoutButton";
+import { useEffect, useState } from "react";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+
+export default function AdminPanel() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [counts, setCounts] = useState({
+        participants: 0,
+        teams: 0,
+        payments: 0,
+        attendance: 0
+    });
+
+    useEffect(() => {
+        // Simulate loading and fetch any necessary data
+        const fetchCounts = async () => {
+            try {
+                // You can add API calls here to get actual counts
+                const response = await fetch('/api/counts');
+                if (response.ok) {
+                    const data = await response.json();
+                    setCounts(data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch counts:', error);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchCounts();
+    }, []);
+
+    if (isLoading) {
+        return (
+            <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white flex items-center justify-center">
+                <LoadingSpinner />
+            </div>
+        );
+    }
 
 
-export default async function AdminPanel() {
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
             <div className="mx-auto max-w-6xl px-8 py-14">
@@ -32,6 +72,11 @@ export default async function AdminPanel() {
                             <div className="rounded-lg border border-white/10 bg-black/20 p-5">
                                 <div className="flex items-center gap-3 mb-2">
                                     <h3 className="font-medium text-white text-lg">Participants</h3>
+                                    {counts.participants > 0 && (
+                                        <span className="px-2 py-1 text-xs rounded-full bg-blue-500/20 text-blue-400">
+                                            {counts.participants}
+                                        </span>
+                                    )}
                                 </div>
                                 <p className="mb-5 mt-1 text-sm text-zinc-400">View and manage participants.</p>
                                 <Button variant="secondary" className="w-full text-black hover:text-black h-11 text-sm" asChild>
@@ -41,6 +86,11 @@ export default async function AdminPanel() {
                             <div className="rounded-lg border border-white/10 bg-black/20 p-5">
                                 <div className="flex items-center gap-3 mb-2">
                                     <h3 className="font-medium text-white text-lg">Team</h3>
+                                    {counts.teams > 0 && (
+                                        <span className="px-2 py-1 text-xs rounded-full bg-green-500/20 text-green-400">
+                                            {counts.teams}
+                                        </span>
+                                    )}
                                 </div>
                                 <p className="mb-5 mt-1 text-sm text-zinc-400">View and manage teams.</p>
                                 <Button variant="secondary" className="w-full text-black hover:text-black h-11 text-sm" asChild>
@@ -56,7 +106,14 @@ export default async function AdminPanel() {
 
                         <div className="mt-4 flex flex-col gap-3">
                             <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
-                                <Link href="/admin/attendance">Attendance</Link>
+                                <Link href="/admin/attendance">
+                                    <span>Attendance</span>
+                                    {counts.attendance > 0 && (
+                                        <span className="ml-auto px-2 py-1 text-xs rounded-full bg-orange-500/20 text-orange-400">
+                                            {counts.attendance}
+                                        </span>
+                                    )}
+                                </Link>
                             </Button>
 
                             <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
@@ -64,7 +121,14 @@ export default async function AdminPanel() {
                             </Button>
 
                             <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>
-                                <Link href="/admin/payment">Payment ID</Link>
+                                <Link href="/admin/payment">
+                                    <span>Payment ID</span>
+                                    {counts.payments > 0 && (
+                                        <span className="ml-auto px-2 py-1 text-xs rounded-full bg-purple-500/20 text-purple-400">
+                                            {counts.payments}
+                                        </span>
+                                    )}
+                                </Link>
                             </Button>
                             <div className="pt-2">
                                 <LogoutButton />

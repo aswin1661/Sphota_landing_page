@@ -2,23 +2,37 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // Get the pathname
   const pathname = request.nextUrl.pathname;
 
-  // Check if this is an admin route (but not login)
-  if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
-    // Check for auth cookie
+  // Only check auth for admin routes (excluding login, API routes, and auth check)
+  if (pathname.startsWith('/admin') && 
+      pathname !== '/admin/login' && 
+      !pathname.startsWith('/api/admin/')) {
+    
     const authCookie = request.cookies.get('admin_auth');
     
-    if (!authCookie?.value) {
-      // Redirect to login if not authenticated
-      return NextResponse.redirect(new URL('/admin/login', request.url));
+    // Check if cookie exists and has valid value
+    if (!authCookie?.value || authCookie.value !== 'authenticated') {
+      const loginUrl = new URL('/admin/login', request.url);
+      return NextResponse.redirect(loginUrl);
     }
   }
 
-  return NextResponse.next();
+  // Add cache headers for better performance
+  const response = NextResponse.next();
+  
+  // Prevent caching of admin pages to ensure fresh auth checks
+  if (pathname.startsWith('/admin')) {
+    response.headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+  }
+
+  return response;
 }
 
 export const config = {
-  matcher: '/admin/:path*'
+  matcher: [
+    '/admin/:path*',
+  ]
 };

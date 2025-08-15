@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
+export const runtime = 'nodejs';
+
 const airtableApiKey = process.env.AIRTABLE_API_KEY;
 const airtableBaseId = process.env.AIRTABLE_BASE_ID;
 const airtableTableName = process.env.AIRTABLE_TABLE_NAME;
@@ -10,6 +12,34 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
 }
 
 const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
+
+function airtableErrorResponse(err: unknown) {
+    const isProd = process.env.NODE_ENV === 'production';
+    const baseId = process.env.AIRTABLE_BASE_ID ?? '';
+    const tableName = process.env.AIRTABLE_TABLE_NAME ?? '';
+    const anyErr = err as any;
+    const status = Number(anyErr?.statusCode) || Number(anyErr?.status) || 500;
+    const code = anyErr?.error || anyErr?.code || anyErr?.type;
+    const message = anyErr?.message || String(err);
+
+    if (status === 401 || status === 403 || /NOT_AUTHORIZED/i.test(code ?? '') || /NOT_AUTHORIZED/i.test(message)) {
+        return NextResponse.json({
+            error: 'Airtable authorization failed while trying to fetch participants',
+            hint: 'Verify AIRTABLE_API_KEY scopes and base access.',
+            ...(isProd ? {} : { diagnostics: { status, code, baseId, tableName } }),
+        }, { status: 403 });
+    }
+
+    if (status === 404 || /NOT_FOUND/i.test(code ?? '') || /TABLE_NOT_FOUND/i.test(message)) {
+        return NextResponse.json({
+            error: 'Airtable table not found while trying to fetch participants',
+            hint: 'Check AIRTABLE_TABLE_NAME.',
+            ...(isProd ? {} : { diagnostics: { status, code, baseId, tableName } }),
+        }, { status: 404 });
+    }
+
+    return NextResponse.json({ error: 'Failed to fetch participants', ...(isProd ? {} : { diagnostics: { status, code, message } }) }, { status: 500 });
+}
 
 export async function GET() {
     try {
@@ -58,9 +88,6 @@ export async function GET() {
         return NextResponse.json({ participants, teamRecords });
     } catch (error) {
         console.error('Airtable fetch error:', error);
-        return NextResponse.json(
-            { error: 'Failed to fetch participants' },
-            { status: 500 }
-        );
+        return airtableErrorResponse(error);
     }
 }

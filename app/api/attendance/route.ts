@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
+// Ensure we use the Node.js runtime (Airtable SDK doesn't work on the Edge runtime)
+export const runtime = 'nodejs';
+
 const airtableApiKey = process.env.AIRTABLE_API_KEY;
 const airtableBaseId = process.env.AIRTABLE_BASE_ID;
 const airtableTableName = process.env.AIRTABLE_TABLE_NAME;
@@ -11,9 +14,96 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
 
 const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
 
+// Small helper to translate Airtable/SDK errors into HTTP responses with hints
+function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
+    const isProd = process.env.NODE_ENV === 'production';
+    const baseId = process.env.AIRTABLE_BASE_ID ?? '';
+    const tableName = process.env.AIRTABLE_TABLE_NAME ?? '';
+
+    // Airtable errors often carry statusCode and error codes on the object
+    const anyErr = err as any;
+    const status = Number(anyErr?.statusCode) || Number(anyErr?.status) || 500;
+    const code = anyErr?.error || anyErr?.code || anyErr?.type;
+    const message = anyErr?.message || String(err);
+
+    // Unauthorized or forbidden
+    if (status === 401 || status === 403 || /NOT_AUTHORIZED/i.test(code ?? '') || /NOT_AUTHORIZED/i.test(message)) {
+        return NextResponse.json(
+            {
+                error: `Airtable authorization failed while trying to ${action} attendance data`,
+                hint: 'Verify AIRTABLE_API_KEY has data.records:read/write scopes and access to the specified base.',
+                ...(isProd
+                    ? {}
+                    : { diagnostics: { status, code, baseId, tableName } }),
+            },
+            { status: 403 }
+        );
+    }
+
+    // Table not found
+    if (status === 404 || /NOT_FOUND/i.test(code ?? '') || /TABLE_NOT_FOUND/i.test(message)) {
+        return NextResponse.json(
+            {
+                error: `Airtable table not found while trying to ${action} attendance data`,
+                hint: 'Double-check AIRTABLE_TABLE_NAME exactly matches the table name (including spaces/case).',
+                ...(isProd ? {} : { diagnostics: { status, code, baseId, tableName } }),
+            },
+            { status: 404 }
+        );
+    }
+
+    // Fallback
+    return NextResponse.json(
+        {
+            error: `Failed to ${action} attendance data`,
+            ...(isProd ? {} : { diagnostics: { status, code, message } }),
+        },
+        { status: 500 }
+    );
+}
+
 // GET - Fetch participants with attendance data
 export async function GET() {
     try {
+        // Optional mock mode to allow local development without Airtable
+        if ((process.env.AIRTABLE_USE_MOCK || '').toLowerCase() === 'true' || process.env.AIRTABLE_USE_MOCK === '1') {
+            const mockTeamRecords = [
+                {
+                    recordId: 'rec_mock_1',
+                    teamName: 'Alpha Team',
+                    fields: {
+                        'Team Name': 'Alpha Team',
+                        'Lead': 'Alice',
+                        'Member 1': 'Aaron',
+                        'Member 2': 'Ava',
+                        'Attendance': 'Present',
+                        'Verified': 'Verified',
+                    }
+                },
+                {
+                    recordId: 'rec_mock_2',
+                    teamName: 'Beta Squad',
+                    fields: {
+                        'Team Name': 'Beta Squad',
+                        'Lead': 'Bob',
+                        'Member 1': 'Bella',
+                        'Attendance': 'Absent',
+                        'Verified': '',
+                    }
+                }
+            ] as any[];
+
+            const mockParticipants = [
+                { name: 'Alice', teamName: 'Alpha Team', isLead: true, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },
+                { name: 'Aaron', teamName: 'Alpha Team', isLead: false, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },
+                { name: 'Ava', teamName: 'Alpha Team', isLead: false, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },
+                { name: 'Bob', teamName: 'Beta Squad', isLead: true, recordId: 'rec_mock_2', attendance: 'Absent', recordFields: mockTeamRecords[1].fields },
+                { name: 'Bella', teamName: 'Beta Squad', isLead: false, recordId: 'rec_mock_2', attendance: 'Absent', recordFields: mockTeamRecords[1].fields }
+            ];
+
+            return NextResponse.json({ participants: mockParticipants, teamRecords: mockTeamRecords });
+        }
+
         const records = await base(airtableTableName as string).select().all();
         const participants: {
             name: string;
@@ -75,10 +165,7 @@ export async function GET() {
         return NextResponse.json({ participants, teamRecords });
     } catch (error) {
         console.error('Airtable fetch error:', error);
-        return NextResponse.json(
-            { error: 'Failed to fetch attendance data' },
-            { status: 500 }
-        );
+        return airtableErrorResponse(error, 'fetch');
     }
 }
 
@@ -120,6 +207,11 @@ export async function PUT(request: Request) {
             );
         }
 
+        // Optional mock mode: simulate successful update
+        if ((process.env.AIRTABLE_USE_MOCK || '').toLowerCase() === 'true' || process.env.AIRTABLE_USE_MOCK === '1') {
+            return NextResponse.json({ success: true, record: { id: recordId, fields: fieldsToUpdate } });
+        }
+
         // Update the record in Airtable
         const updatedRecord = await base(airtableTableName as string).update([
             {
@@ -135,9 +227,6 @@ export async function PUT(request: Request) {
 
     } catch (error) {
         console.error('Airtable update error:', error);
-        return NextResponse.json(
-            { error: 'Failed to update record' },
-            { status: 500 }
-        );
+        return airtableErrorResponse(error, 'update');
     }
 }

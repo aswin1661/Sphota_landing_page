@@ -22,6 +22,7 @@ interface TeamRecord {
 export default function AttendancePage() {
     const [teamRecords, setTeamRecords] = useState<TeamRecord[]>([]);
     const [error, setError] = useState<string | undefined>(undefined);
+    const [errorHint, setErrorHint] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
 
@@ -30,9 +31,10 @@ export default function AttendancePage() {
             try {
                 const response = await fetch('/api/attendance');
                 const data = await response.json();
-                
-                if (data.error) {
-                    setError(data.error);
+
+                if (!response.ok || data.error) {
+                    setError(data.error || 'Failed to fetch attendance data');
+                    if (data.hint) setErrorHint(data.hint);
                 } else {
                     setTeamRecords(data.teamRecords);
                 }
@@ -142,8 +144,14 @@ export default function AttendancePage() {
                         {isLoading ? (
                             <LoadingSpinner />
                         ) : error ? (
-                            <div className="text-center py-6 bg-red-500/10 rounded-lg border border-red-500/20">
-                                <p className="text-red-400">{error}</p>
+                            <div className="text-center py-6 bg-red-500/10 rounded-lg border border-red-500/20 space-y-2">
+                                <p className="text-red-400 font-medium">{error}</p>
+                                {errorHint && (
+                                    <p className="text-sm text-red-200/80">Hint: {errorHint}</p>
+                                )}
+                                <p className="text-xs text-zinc-400">
+                                    See <a className="underline hover:text-white" href="/api/airtable/health" target="_blank" rel="noreferrer">/api/airtable/health</a> for diagnostics.
+                                </p>
                             </div>
                         ) : teamRecords.length > 0 ? (
                             <div className="space-y-3">
