@@ -60,7 +60,26 @@ export async function GET() {
                 upiTransactionId,
                 attachmentUrl,
                 attachmentName,
-                isVerified
+                isVerified,
+                // Team member details
+                member1: fields['Member 1'] as string || '',
+                member2: fields['Member 2'] as string || '',
+                member3: fields['Member 3'] as string || '',
+                member4: fields['Member 4'] as string || '',
+                // IEEE Membership IDs - trying multiple possible field names for Lead
+                ieeeIdLead: String(
+                    fields['IEEE Membership Id  Lead'] || 
+                    fields['IEEE Membership Id Lead'] || 
+                    fields['IEEE Membership ID Lead'] || 
+                    fields['IEEE ID Lead'] ||
+                    fields['Lead IEEE ID'] ||
+                    fields['Lead IEEE Membership ID'] ||
+                    ''
+                ),
+                ieeeIdMember1: '', // No IEEE field for Member 1 in your Airtable
+                ieeeIdMember2: '', // No IEEE field for Member 2 in your Airtable
+                ieeeIdMember3: String(fields['IEEE Id Member 3'] || ''), // Note: lowercase 'd' in "Id"
+                ieeeIdMember4: String(fields['IEEE ID Member 4'] || ''), // Note: uppercase 'D' in "ID"
             };
         });
 
