@@ -31,10 +31,18 @@ export async function GET() {
             message: 'Airtable connection OK',
         });
     } catch (err) {
-        const anyErr = err as any;
-        const status = Number(anyErr?.statusCode) || Number(anyErr?.status) || 500;
-        const code = anyErr?.error || anyErr?.code || anyErr?.type;
-        const message = anyErr?.message || String(err);
+        type AirtableSdkError = {
+            statusCode?: number;
+            status?: number;
+            error?: string;
+            code?: string;
+            type?: string;
+            message?: string;
+        };
+        const e = err as AirtableSdkError;
+        const status = Number(e?.statusCode) || Number(e?.status) || 500;
+        const code = e?.error || e?.code || e?.type;
+        const message = e?.message || String(err);
         return NextResponse.json({
             ok: false,
             error: 'Failed to connect to Airtable',

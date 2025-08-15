@@ -15,16 +15,25 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
 const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
 
 // Small helper to translate Airtable/SDK errors into HTTP responses with hints
+type AirtableSdkError = {
+    statusCode?: number;
+    status?: number;
+    error?: string;
+    code?: string;
+    type?: string;
+    message?: string;
+};
+
 function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
     const isProd = process.env.NODE_ENV === 'production';
     const baseId = process.env.AIRTABLE_BASE_ID ?? '';
     const tableName = process.env.AIRTABLE_TABLE_NAME ?? '';
 
     // Airtable errors often carry statusCode and error codes on the object
-    const anyErr = err as any;
-    const status = Number(anyErr?.statusCode) || Number(anyErr?.status) || 500;
-    const code = anyErr?.error || anyErr?.code || anyErr?.type;
-    const message = anyErr?.message || String(err);
+    const e = err as AirtableSdkError;
+    const status = Number(e?.statusCode) || Number(e?.status) || 500;
+    const code = e?.error || e?.code || e?.type;
+    const message = e?.message || String(err);
 
     // Unauthorized or forbidden
     if (status === 401 || status === 403 || /NOT_AUTHORIZED/i.test(code ?? '') || /NOT_AUTHORIZED/i.test(message)) {
@@ -67,11 +76,13 @@ export async function GET() {
     try {
         // Optional mock mode to allow local development without Airtable
         if ((process.env.AIRTABLE_USE_MOCK || '').toLowerCase() === 'true' || process.env.AIRTABLE_USE_MOCK === '1') {
-            const mockTeamRecords = [
+        type MockFields = Record<string, string | boolean>;
+        type MockTeam = { recordId: string; teamName: string; fields: MockFields };
+        const mockTeamRecords: MockTeam[] = [
                 {
                     recordId: 'rec_mock_1',
                     teamName: 'Alpha Team',
-                    fields: {
+            fields: {
                         'Team Name': 'Alpha Team',
                         'Lead': 'Alice',
                         'Member 1': 'Aaron',
@@ -83,7 +94,7 @@ export async function GET() {
                 {
                     recordId: 'rec_mock_2',
                     teamName: 'Beta Squad',
-                    fields: {
+            fields: {
                         'Team Name': 'Beta Squad',
                         'Lead': 'Bob',
                         'Member 1': 'Bella',
@@ -91,9 +102,9 @@ export async function GET() {
                         'Verified': '',
                     }
                 }
-            ] as any[];
+        ];
 
-            const mockParticipants = [
+        const mockParticipants: Array<{ name: string; teamName: string; isLead: boolean; recordId: string; attendance: string; recordFields: MockFields }>= [
                 { name: 'Alice', teamName: 'Alpha Team', isLead: true, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },
                 { name: 'Aaron', teamName: 'Alpha Team', isLead: false, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },
                 { name: 'Ava', teamName: 'Alpha Team', isLead: false, recordId: 'rec_mock_1', attendance: 'Present', recordFields: mockTeamRecords[0].fields },

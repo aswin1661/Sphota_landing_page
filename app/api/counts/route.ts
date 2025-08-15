@@ -13,14 +13,23 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
 
 const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
 
-function airtableErrorResponse(err: unknown, action: 'fetch') {
+type AirtableSdkError = {
+    statusCode?: number;
+    status?: number;
+    error?: string;
+    code?: string;
+    type?: string;
+    message?: string;
+};
+
+function airtableErrorResponse(err: unknown) {
     const isProd = process.env.NODE_ENV === 'production';
     const baseId = process.env.AIRTABLE_BASE_ID ?? '';
     const tableName = process.env.AIRTABLE_TABLE_NAME ?? '';
-    const anyErr = err as any;
-    const status = Number(anyErr?.statusCode) || Number(anyErr?.status) || 500;
-    const code = anyErr?.error || anyErr?.code || anyErr?.type;
-    const message = anyErr?.message || String(err);
+    const e = err as AirtableSdkError;
+    const status = Number(e?.statusCode) || Number(e?.status) || 500;
+    const code = e?.error || e?.code || e?.type;
+    const message = e?.message || String(err);
 
     if (status === 401 || status === 403 || /NOT_AUTHORIZED/i.test(code ?? '') || /NOT_AUTHORIZED/i.test(message)) {
         return NextResponse.json({
@@ -72,6 +81,6 @@ export async function GET() {
         });
     } catch (error) {
         console.error('Airtable fetch error:', error);
-        return airtableErrorResponse(error, 'fetch');
+    return airtableErrorResponse(error);
     }
 }
