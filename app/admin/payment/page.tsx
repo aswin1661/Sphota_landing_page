@@ -300,7 +300,7 @@ export default function PaymentPage() {
                                             <p>Showing: {filteredPayments.length} of {payments.length} teams</p>
                                             {searchTerm && (
                                                 <p className="text-blue-400 mt-1">
-                                                    🔍 Search: "{searchTerm}" ({filteredPayments.length} matches)
+                                                    🔍 Search: &quot;{searchTerm}&quot; ({filteredPayments.length} matches)
                                                 </p>
                                             )}
                                         </div>
