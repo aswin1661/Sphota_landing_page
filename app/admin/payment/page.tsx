@@ -39,6 +39,7 @@ export default function PaymentPage() {
     const [error, setError] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState<'unverified' | 'verified' | 'all'>('unverified'); // Default to unverified
+    const [searchTerm, setSearchTerm] = useState<string>(''); // Search by UPI transaction ID
 
     useEffect(() => {
         async function fetchData() {
@@ -72,14 +73,39 @@ export default function PaymentPage() {
     };
 
     const getFilteredPayments = () => {
+        let filtered = payments;
+        
+        // Apply verification filter
         switch (filter) {
             case 'verified':
-                return payments.filter(payment => payment.isVerified);
+                filtered = filtered.filter(payment => payment.isVerified);
+                break;
             case 'unverified':
-                return payments.filter(payment => !payment.isVerified);
+                filtered = filtered.filter(payment => !payment.isVerified);
+                break;
             default:
-                return payments;
+                // 'all' - no verification filter
+                break;
         }
+        
+        // Apply UPI transaction ID search filter (exact match)
+        if (searchTerm.trim()) {
+            filtered = filtered.filter(payment => {
+                const upiId = payment.upiTransactionId;
+                
+                // Handle null, undefined, or non-string values
+                if (!upiId) return false;
+                
+                // Convert to string and trim whitespace
+                const upiIdStr = String(upiId).trim();
+                const searchStr = searchTerm.trim();
+                
+                // Exact match comparison
+                return upiIdStr === searchStr;
+            });
+        }
+        
+        return filtered;
     };
 
     const getTeamMembers = (payment: PaymentInfo) => {
@@ -182,14 +208,42 @@ export default function PaymentPage() {
                         <p className="mt-1 text-base text-zinc-300"></p>
                     </div>
                     
-                    <div className="flex items-center gap-4">
-                        <Link 
-                            href="/admin" 
-                            className="text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
-                        >
-                            Back to Admin
-                        </Link>
-                        <LogoutButton />
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        {/* Search Box */}
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg className="h-5 w-5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                placeholder="Check UPI transaction ID..."
+                                className="block w-full pl-10 pr-3 py-2 border border-white/20 rounded-lg bg-slate-800/50 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500/50 text-sm backdrop-blur"
+                            />
+                            {searchTerm && (
+                                <button
+                                    onClick={() => setSearchTerm('')}
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                                >
+                                    <svg className="h-4 w-4 text-zinc-400 hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
+                        </div>
+                        
+                        <div className="flex items-center gap-4">
+                            <Link 
+                                href="/admin" 
+                                className="text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
+                            >
+                                Back to Admin
+                            </Link>
+                            <LogoutButton />
+                        </div>
                     </div>
                 </header>
 
@@ -242,9 +296,14 @@ export default function PaymentPage() {
                                         {getFilterTitle()}
                                     </h2>
                                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-                                        <p className="text-sm text-zinc-400">
-                                            Showing: {filteredPayments.length} of {payments.length} teams
-                                        </p>
+                                        <div className="text-sm text-zinc-400">
+                                            <p>Showing: {filteredPayments.length} of {payments.length} teams</p>
+                                            {searchTerm && (
+                                                <p className="text-blue-400 mt-1">
+                                                    🔍 Search: "{searchTerm}" ({filteredPayments.length} matches)
+                                                </p>
+                                            )}
+                                        </div>
                                         <div className="flex gap-2">
                                             {filter !== 'unverified' && (
                                                 <button 
