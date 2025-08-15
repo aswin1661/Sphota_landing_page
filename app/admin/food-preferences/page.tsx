@@ -49,17 +49,17 @@ export default function FoodPreferencesPage() {
 
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
-            <div className="mx-auto max-w-6xl px-8 py-14">
-                <header className="flex items-center justify-between mb-10">
+            <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-14">
+                <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 lg:mb-10 gap-4">
                     <div>
-                        <h1 className="text-4xl font-extrabold tracking-tight text-white">Food Preferences</h1>
-                        <p className="mt-1 text-base text-zinc-300"></p>
+                        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white">Food Preferences</h1>
+                        <p className="mt-1 text-sm sm:text-base text-zinc-300"></p>
                     </div>
                     
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4">
                         <Link 
                             href="/admin" 
-                            className="text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
+                            className="text-sm sm:text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
                         >
                             Back to Admin
                         </Link>
@@ -78,11 +78,41 @@ export default function FoodPreferencesPage() {
                         </div>
                     ) : stats ? (
                         <>
+                            {/* Summary Stats */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className="w-3 h-3 bg-green-400 rounded-full"></span>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-white">Vegetarian</h3>
+                                    </div>
+                                    <p className="text-2xl sm:text-3xl font-bold text-green-400">{stats.vegCount}</p>
+                                    <p className="text-xs sm:text-sm text-zinc-400">participants</p>
+                                </div>
+                                
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className="w-3 h-3 bg-red-400 rounded-full"></span>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-white">Non-Vegetarian</h3>
+                                    </div>
+                                    <p className="text-2xl sm:text-3xl font-bold text-red-400">{stats.nonVegCount}</p>
+                                    <p className="text-xs sm:text-sm text-zinc-400">participants</p>
+                                </div>
+                                
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur sm:col-span-2 lg:col-span-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className="w-3 h-3 bg-blue-400 rounded-full"></span>
+                                        <h3 className="text-lg sm:text-xl font-semibold text-white">Total</h3>
+                                    </div>
+                                    <p className="text-2xl sm:text-3xl font-bold text-blue-400">{stats.totalCount}</p>
+                                    <p className="text-xs sm:text-sm text-zinc-400">participants</p>
+                                </div>
+                            </div>
+
                             {/* Detailed Lists */}
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                                 {/* Vegetarian Participants */}
-                                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                                    <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
+                                    <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-green-400 rounded-full"></span>
                                         Vegetarian Participants ({stats.vegCount})
                                     </h2>
@@ -91,18 +121,18 @@ export default function FoodPreferencesPage() {
                                         {stats.vegParticipants.map((participant, index) => (
                                             <div 
                                                 key={index}
-                                                className="flex items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5"
+                                                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5 gap-2"
                                             >
-                                                <div>
-                                                    <div className="text-zinc-100 font-medium">
+                                                <div className="min-w-0 flex-1">
+                                                    <div className="text-zinc-100 font-medium break-words">
                                                         {participant.name}
                                                     </div>
-                                                    <div className="text-xs text-zinc-400">
+                                                    <div className="text-xs text-zinc-400 break-words">
                                                         {participant.teamName}
                                                     </div>
                                                 </div>
                                                 {participant.isLead && (
-                                                    <span className="px-2 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                                                    <span className="px-2 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 whitespace-nowrap">
                                                         Lead
                                                     </span>
                                                 )}
@@ -115,8 +145,8 @@ export default function FoodPreferencesPage() {
                                 </div>
 
                                 {/* Non-Vegetarian Participants */}
-                                <div className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                                    <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                                <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
+                                    <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-red-400 rounded-full"></span>
                                         Non-Vegetarian Participants ({stats.nonVegCount})
                                     </h2>
@@ -125,18 +155,18 @@ export default function FoodPreferencesPage() {
                                         {stats.nonVegParticipants.map((participant, index) => (
                                             <div 
                                                 key={index}
-                                                className="flex items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5"
+                                                className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-lg border border-white/10 bg-white/5 gap-2"
                                             >
-                                                <div>
-                                                    <div className="text-zinc-100 font-medium">
+                                                <div className="min-w-0 flex-1">
+                                                    <div className="text-zinc-100 font-medium break-words">
                                                         {participant.name}
                                                     </div>
-                                                    <div className="text-xs text-zinc-400">
+                                                    <div className="text-xs text-zinc-400 break-words">
                                                         {participant.teamName}
                                                     </div>
                                                 </div>
                                                 {participant.isLead && (
-                                                    <span className="px-2 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                                                    <span className="px-2 py-1 text-xs rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 whitespace-nowrap">
                                                         Lead
                                                     </span>
                                                 )}
@@ -156,7 +186,7 @@ export default function FoodPreferencesPage() {
                     )}
                 </main>
 
-                <footer className="mt-16 text-center text-sm text-zinc-500">
+                <footer className="mt-8 sm:mt-12 lg:mt-16 text-center text-sm text-zinc-500">
                     Secure area · Logged in
                 </footer>
             </div>

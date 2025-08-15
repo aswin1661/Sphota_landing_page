@@ -71,22 +71,9 @@ export async function GET() {
             const teamName = fields['Team Name'] as string || 'Unnamed Team';
             const lead = fields['Lead'] as string;
             
-            // Check lead's food preference with multiple possible field names
+            // Check lead's food preference
             if (lead) {
-                const possibleLeadFoodFields = [
-                    'Lead Food Preference',
-                    'Food Preference', // In case it's shared
-                    'Lead Food',
-                    'Dietary Preference'
-                ];
-                
-                let leadFoodPref = null;
-                for (const fieldName of possibleLeadFoodFields) {
-                    if (fields[fieldName]) {
-                        leadFoodPref = fields[fieldName] as string;
-                        break;
-                    }
-                }
+                const leadFoodPref = fields['Food Preference'] as string;
                 
                 if (leadFoodPref) {
                     const prefLower = leadFoodPref.toLowerCase().trim();
@@ -106,27 +93,14 @@ export async function GET() {
                 }
             }
 
-            // Check team members' food preferences
-            for (let i = 1; i <= 4; i++) {
+            // Check team members' food preferences using correct field names
+            for (let i = 2; i <= 4; i++) {
                 const memberKey = `Member ${i}`;
                 const memberName = fields[memberKey] as string;
                 
                 if (memberName) {
-                    const possibleMemberFoodFields = [
-                        `Member ${i} Food Preference`,
-                        `Member ${i} Food`,
-                        `Member${i} Food Preference`,
-                        'Food Preference', // In case it's a shared field
-                        `Dietary Preference ${i}`
-                    ];
-                    
-                    let memberFoodPref = null;
-                    for (const fieldName of possibleMemberFoodFields) {
-                        if (fields[fieldName]) {
-                            memberFoodPref = fields[fieldName] as string;
-                            break;
-                        }
-                    }
+                    const foodPrefField = `Food Preference Member ${i}`;
+                    const memberFoodPref = fields[foodPrefField] as string;
                     
                     if (memberFoodPref) {
                         const prefLower = memberFoodPref.toLowerCase().trim();
