@@ -6,11 +6,11 @@ import React from "react";
 const partners = [
   {
     name: 'Media Partner',
-    image: '/images/webp/mediaone.webp'
+    image: '/images/webp/mediaone.webp',
   },
   {
     name: 'Title Sponsor',
-    image: '/images/scopeindia.png'
+    image: '/images/scopeindia.png',
   },
   {
     name: 'Food Partner',
@@ -80,12 +80,12 @@ export default function Partners() {
           <h2
             className={`${
               isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            } text-center text-white text-2xl md:text-4xl font-semibold mt-10 mb-8 berserker`}
+            } text-center text-white text-4xl md:text-4xl font-semibold mt-[6rem] mb-8 berserker`}
           >
             Our Partners
           </h2>
 
-          <div className="flex z-20 justify-center gap-6 flex-wrap">
+          <div className="flex z-20 justify-center mb-[5rem] gap-6 flex-wrap">
             {partners.map((partner, index) => (
               <div
                 key={index}
