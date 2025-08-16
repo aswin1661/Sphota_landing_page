@@ -10,7 +10,7 @@ const partners = [
   },
   {
     name: 'Title Sponsor',
-    image: '/images/webp/scopeindia.png'
+    image: '/images/scopeindia.png'
   },
   {
     name: 'Food Partner',
