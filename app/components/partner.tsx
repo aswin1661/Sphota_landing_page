@@ -10,12 +10,13 @@ const partners = [
   },
   {
     name: 'Title Sponsor',
-    image: '/images/webp/scopeindia.png'
+    image: '/images/scopeindia.png'
   },
   {
     name: 'Food Partner',
     image: '/images/webp/unibic.webp'
   },
+  
 ];
 
 export default function Partners() {
@@ -75,16 +76,16 @@ export default function Partners() {
         <div className="absolute inset-0 bg-black opacity-30 z-10" />
 
         {/* Foreground Content */}
-        <div className="relative z-10 flex flex-col items-center px-4">
+        <div className="relative z-20 flex flex-col items-center px-4">
           <h2
             className={`${
               isVisible ? 'animate-fade-in-up' : 'opacity-0'
-            } text-center text-white text-2xl md:text-4xl font-semibold mb-8 berserker`}
+            } text-center text-white text-2xl md:text-4xl font-semibold mt-10 mb-8 berserker`}
           >
             Our Partners
           </h2>
 
-          <div className="flex justify-center gap-6 flex-wrap">
+          <div className="flex z-20 justify-center gap-6 flex-wrap">
             {partners.map((partner, index) => (
               <div
                 key={index}
