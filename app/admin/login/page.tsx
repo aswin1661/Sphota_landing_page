@@ -36,11 +36,7 @@ export default function AdminLogin() {
   }, []);
 
 
-  useEffect(() => {
-    if (error && password) {
-      setError("");
-    }
-  }, [password, error]);
+  // Remove automatic error clearing - let user see the error
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,7 +65,7 @@ export default function AdminLogin() {
 
         window.location.href = "/admin";
       } else {
-        setError(data.message || "Invalid password");
+        setError(data.message || "Incorrect password");
       }
     } catch (err) {
       console.error("Login error:", err);

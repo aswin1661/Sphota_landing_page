@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
     if (password.trim() !== ADMIN_PASSWORD) {
       return NextResponse.json(
-        { success: false, message: "Invalid credentials" }, 
+        { success: false, message: "Incorrect password" }, 
         { status: 401 }
       );
     }
