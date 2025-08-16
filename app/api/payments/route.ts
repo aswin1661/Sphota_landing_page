@@ -69,7 +69,7 @@ export async function GET() {
                     fields['Lead IEEE Membership ID'] ||
                     ''
                 ),
-                ieeeIdMember2: String(fields['IEEE Id Member 3'] || ''), 
+                ieeeIdMember2: String(fields['IEEE Id Member 2'] || ''), 
                 ieeeIdMember3: String(fields['IEEE Id Member 3'] || ''),
                 ieeeIdMember4: String(fields['IEEE ID Member 4'] || ''),
             };
