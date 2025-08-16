@@ -104,7 +104,7 @@ export default function Home() {
         </button>
 
         <a
-  href="https://drive.google.com/file/d/1EdxIPuRw7vLNBh43WJSy3zOUIqR8jSAr/view?usp=drivesdk"
+  href="https://drive.google.com/file/d/1ikETkiu5MgLZo3dY1zaBiyGtF5xlH6xo/view?usp=drivesdk"
   target="_blank"
   rel="noopener noreferrer"
   className="absolute mt-[80vh] text-white text-sm underline animated animatedFadeInUp fadeInUp z-30 tahoma hover:text-blue-300 transition"
