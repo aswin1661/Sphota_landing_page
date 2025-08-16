@@ -78,7 +78,6 @@ export default function FoodPreferencesPage() {
                         </div>
                     ) : stats ? (
                         <>
-                            {/* Summary Stats */}
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
                                 <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
                                     <div className="flex items-center gap-3 mb-2">
@@ -107,10 +106,7 @@ export default function FoodPreferencesPage() {
                                     <p className="text-xs sm:text-sm text-zinc-400">participants</p>
                                 </div>
                             </div>
-
-                            {/* Detailed Lists */}
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-                                {/* Vegetarian Participants */}
                                 <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
                                     <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-green-400 rounded-full"></span>
@@ -144,7 +140,6 @@ export default function FoodPreferencesPage() {
                                     </div>
                                 </div>
 
-                                {/* Non-Vegetarian Participants */}
                                 <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 backdrop-blur">
                                     <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 flex items-center gap-2">
                                         <span className="w-3 h-3 bg-red-400 rounded-full"></span>

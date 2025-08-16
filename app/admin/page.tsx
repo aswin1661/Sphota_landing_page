@@ -16,10 +16,10 @@ export default function AdminPanel() {
     });
 
     useEffect(() => {
-        // Simulate loading and fetch any necessary data
+        
         const fetchCounts = async () => {
             try {
-                // You can add API calls here to get actual counts
+              
                 const response = await fetch('/api/counts');
                 if (response.ok) {
                     const data = await response.json();
@@ -63,7 +63,7 @@ export default function AdminPanel() {
 
                 <main className="mt-14 grid grid-cols-1 gap-8 md:grid-cols-3">
                     <section className="col-span-2 rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur">
-                        <h2 className="text-xl font-semibold text-white">Dashboard</h2>
+                        <h2 className="text-xl font-semibold text-white ">Dashboard</h2>
                         <p className="mt-1 text-base text-zinc-300">
                             Quick access
                         </p>
@@ -102,7 +102,7 @@ export default function AdminPanel() {
 
                     <aside className="rounded-xl border border-white/10 bg-white/5 p-6 backdrop-blur">
                         <h2 className="text-lg font-semibold text-white">Quick Links</h2>
-                        <p className="mt-1 text-sm text-zinc-300">Quick access to common pages</p>
+                        <p className="mt-1 text-sm text-zinc-300"></p>
 
                         <div className="mt-4 flex flex-col gap-3">
                             <Button variant="secondary" className="w-full text-black hover:text-black h-9 text-sm justify-start" asChild>

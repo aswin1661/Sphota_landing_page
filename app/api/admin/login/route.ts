@@ -5,7 +5,6 @@ export async function POST(req: Request) {
     const body = await req.json();
     const password = body?.password as string | undefined;
 
-    // Check if password is provided
     if (!password || typeof password !== 'string') {
       return NextResponse.json(
         { success: false, message: "Password is required" }, 
@@ -15,7 +14,6 @@ export async function POST(req: Request) {
 
     const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
 
-    // Trim and validate password
     if (password.trim() !== ADMIN_PASSWORD) {
       return NextResponse.json(
         { success: false, message: "Invalid credentials" }, 
@@ -23,7 +21,6 @@ export async function POST(req: Request) {
       );
     }
 
-    // Create successful response with auth cookie
     const res = NextResponse.json({ 
       success: true, 
       message: "Login successful" 
@@ -36,7 +33,7 @@ export async function POST(req: Request) {
       sameSite: "lax",
       secure: process.env.NODE_ENV === "production",
       path: "/",
-      maxAge: 60 * 60 * 8, // 8 hours
+      maxAge: 60 * 60 * 8, 
     });
 
     return res;

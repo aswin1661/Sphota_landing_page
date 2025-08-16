@@ -64,11 +64,9 @@ export async function GET() {
             const teamName = record.get('Team Name');
             if (teamName) uniqueTeams.add(teamName);
 
-            // Count lead
             const lead = record.get('Lead');
             if (lead) participantCount++;
 
-            // Count members
             for (let i = 1; i <= 4; i++) {
                 const member = record.get(`Member ${i}`);
                 if (member && member !== lead) participantCount++;

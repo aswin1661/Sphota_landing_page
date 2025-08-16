@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import Airtable from 'airtable';
 
-// Ensure we use the Node.js runtime (Airtable SDK doesn't work on the Edge runtime)
+
 export const runtime = 'nodejs';
 
 const airtableApiKey = process.env.AIRTABLE_API_KEY;
@@ -14,7 +14,7 @@ if (!airtableApiKey || !airtableBaseId || !airtableTableName) {
 
 const base = new Airtable({ apiKey: airtableApiKey }).base(airtableBaseId);
 
-// Small helper to translate Airtable/SDK errors into HTTP responses with hints
+
 type AirtableSdkError = {
     statusCode?: number;
     status?: number;
@@ -29,13 +29,12 @@ function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
     const baseId = process.env.AIRTABLE_BASE_ID ?? '';
     const tableName = process.env.AIRTABLE_TABLE_NAME ?? '';
 
-    // Airtable errors often carry statusCode and error codes on the object
+
     const e = err as AirtableSdkError;
     const status = Number(e?.statusCode) || Number(e?.status) || 500;
     const code = e?.error || e?.code || e?.type;
     const message = e?.message || String(err);
 
-    // Unauthorized or forbidden
     if (status === 401 || status === 403 || /NOT_AUTHORIZED/i.test(code ?? '') || /NOT_AUTHORIZED/i.test(message)) {
         return NextResponse.json(
             {
@@ -49,7 +48,6 @@ function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
         );
     }
 
-    // Table not found
     if (status === 404 || /NOT_FOUND/i.test(code ?? '') || /TABLE_NOT_FOUND/i.test(message)) {
         return NextResponse.json(
             {
@@ -61,7 +59,6 @@ function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
         );
     }
 
-    // Fallback
     return NextResponse.json(
         {
             error: `Failed to ${action} attendance data`,
@@ -71,10 +68,8 @@ function airtableErrorResponse(err: unknown, action: 'fetch' | 'update') {
     );
 }
 
-// GET - Fetch participants with attendance data
 export async function GET() {
     try {
-        // Optional mock mode to allow local development without Airtable
         if ((process.env.AIRTABLE_USE_MOCK || '').toLowerCase() === 'true' || process.env.AIRTABLE_USE_MOCK === '1') {
         type MockFields = Record<string, string | boolean>;
         type MockTeam = { recordId: string; teamName: string; fields: MockFields };
@@ -137,14 +132,12 @@ export async function GET() {
             const lead = fields['Lead'] as string;
             const attendance = fields['Attendance'] as string;
 
-            // Store team record with record ID
             teamRecords.push({
                 recordId: record.id,
                 fields,
                 teamName
             });
 
-            // Add lead to participants
             if (lead) {
                 participants.push({
                     name: lead,
@@ -156,7 +149,6 @@ export async function GET() {
                 });
             }
 
-            // Add team members to participants
             for (let i = 1; i <= 4; i++) {
                 const memberKey = `Member ${i}`;
                 const memberName = fields[memberKey] as string;
@@ -180,7 +172,6 @@ export async function GET() {
     }
 }
 
-// PUT - Update attendance or verification for a specific record
 export async function PUT(request: Request) {
     try {
         const body: { recordId?: string; attendance?: string; verified?: boolean } = await request.json();
@@ -195,7 +186,6 @@ export async function PUT(request: Request) {
 
         const fieldsToUpdate: Record<string, string | boolean> = {};
 
-        // Handle attendance update
         if (attendance !== undefined) {
             if (!['Present', 'Absent'].includes(attendance)) {
                 return NextResponse.json(
@@ -206,7 +196,6 @@ export async function PUT(request: Request) {
             fieldsToUpdate.Attendance = attendance;
         }
 
-        // Handle verification update
         if (verified !== undefined) {
             fieldsToUpdate.Verified = verified ? 'Verified' : '';
         }
@@ -218,12 +207,10 @@ export async function PUT(request: Request) {
             );
         }
 
-        // Optional mock mode: simulate successful update
         if ((process.env.AIRTABLE_USE_MOCK || '').toLowerCase() === 'true' || process.env.AIRTABLE_USE_MOCK === '1') {
             return NextResponse.json({ success: true, record: { id: recordId, fields: fieldsToUpdate } });
         }
 
-        // Update the record in Airtable
         const updatedRecord = await base(airtableTableName as string).update([
             {
                 id: recordId,

@@ -20,13 +20,11 @@ export async function GET() {
         const payments = records.map((record: Airtable.Record<Airtable.FieldSet>) => {
             const fields = record.fields;
             
-            // Extract attachment information if available
             let attachmentUrl = null;
             let attachmentName = null;
             
-            // Check for payment screenshot field (with trailing space)
             const possibleAttachmentFields = [
-                'Screenshot of payment ', // Note: this has a trailing space
+                'Screenshot of payment ',
                 'Screenshot of payment',
                 'Payment Screenshot',
                 'Payment Attachment',
@@ -45,11 +43,8 @@ export async function GET() {
                 }
             }
             
-            // Get UPI Transaction ID - check for field with trailing space
             const upiTransactionId = fields['UPI Transaction ID '] as string || null;
             
-            // Get verification status - check for dropdown field named "Verified"
-            // The dropdown will contain "Verified" as a single choice option
             const verificationStatus = fields['Verified'] as string;
             const isVerified = verificationStatus === 'Verified';
             
@@ -61,12 +56,10 @@ export async function GET() {
                 attachmentUrl,
                 attachmentName,
                 isVerified,
-                // Team member details
                 member1: fields['Member 1'] as string || '',
                 member2: fields['Member 2'] as string || '',
                 member3: fields['Member 3'] as string || '',
                 member4: fields['Member 4'] as string || '',
-                // IEEE Membership IDs - trying multiple possible field names for Lead
                 ieeeIdLead: String(
                     fields['IEEE Membership Id  Lead'] || 
                     fields['IEEE Membership Id Lead'] || 
@@ -76,10 +69,9 @@ export async function GET() {
                     fields['Lead IEEE Membership ID'] ||
                     ''
                 ),
-                ieeeIdMember1: '', // No IEEE field for Member 1 in your Airtable
-                ieeeIdMember2: '', // No IEEE field for Member 2 in your Airtable
-                ieeeIdMember3: String(fields['IEEE Id Member 3'] || ''), // Note: lowercase 'd' in "Id"
-                ieeeIdMember4: String(fields['IEEE ID Member 4'] || ''), // Note: uppercase 'D' in "ID"
+                ieeeIdMember2: String(fields['IEEE Id Member 3'] || ''), 
+                ieeeIdMember3: String(fields['IEEE Id Member 3'] || ''),
+                ieeeIdMember4: String(fields['IEEE ID Member 4'] || ''),
             };
         });
 
@@ -104,14 +96,11 @@ export async function PUT(request: Request) {
             );
         }
 
-        // Update the "Verified" dropdown field
-        // Set to "Verified" when verifying, or undefined when unverifying
         const updateData: Record<string, string> = {};
         if (isVerified) {
             updateData['Verified'] = 'Verified';
         } else {
-            // For Airtable, we don't set the field to remove the selection
-            // This effectively clears the dropdown
+            // set the field to remove the selection
         }
 
         try {
@@ -124,7 +113,6 @@ export async function PUT(request: Request) {
         } catch (error: unknown) {
             const airtableError = error as { error?: string };
             if (airtableError.error === 'UNKNOWN_FIELD_NAME') {
-                // If "Verified" field doesn't exist, track locally
                 console.log('No "Verified" dropdown field found in Airtable, tracking locally');
                 return NextResponse.json({ 
                     success: true, 

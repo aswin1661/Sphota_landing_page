@@ -12,15 +12,13 @@ export default function LogoutButton() {
     try {
       const response = await fetch("/api/admin/logout", { method: "POST" });
       if (response.ok) {
-        // Clear any client-side state before redirect
         startTransition(() => {
           router.replace("/admin/login");
-          router.refresh(); // Force a fresh load
+          router.refresh();
         });
       }
     } catch (error) {
       console.error('Logout failed:', error);
-      // Still redirect on error to prevent stuck state
       startTransition(() => router.replace("/admin/login"));
     }
   }

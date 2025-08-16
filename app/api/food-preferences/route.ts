@@ -71,7 +71,6 @@ export async function GET() {
             const teamName = fields['Team Name'] as string || 'Unnamed Team';
             const lead = fields['Lead'] as string;
             
-            // Check lead's food preference
             if (lead) {
                 const leadFoodPref = fields['Food Preference'] as string;
                 
@@ -93,7 +92,6 @@ export async function GET() {
                 }
             }
 
-            // Check team members' food preferences using correct field names
             for (let i = 2; i <= 4; i++) {
                 const memberKey = `Member ${i}`;
                 const memberName = fields[memberKey] as string;

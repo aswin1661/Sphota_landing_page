@@ -65,7 +65,6 @@ export async function GET() {
             recordFields: record.fields
         }));
 
-        // Remove duplicates based on team name
         const uniqueTeams = Array.from(
             new Map(teams.map(team => [team.teamName, team])).values()
         );

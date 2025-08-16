@@ -9,7 +9,7 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const [checking, setChecking] = useState(true);
 
-  // Check if already authenticated on component mount
+
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -35,7 +35,7 @@ export default function AdminLogin() {
     checkAuth();
   }, []);
 
-  // Clear any existing error when password changes
+
   useEffect(() => {
     if (error && password) {
       setError("");
@@ -66,7 +66,7 @@ export default function AdminLogin() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        // Force a hard refresh to ensure cookie is recognized
+
         window.location.href = "/admin";
       } else {
         setError(data.message || "Invalid password");

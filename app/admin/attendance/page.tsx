@@ -65,7 +65,6 @@ export default function AttendancePage() {
             const data = await response.json();
             
             if (data.success) {
-                // Update the local state
                 setTeamRecords(prev => 
                     prev.map(record => 
                         record.recordId === recordId 
@@ -87,7 +86,6 @@ export default function AttendancePage() {
     const getAllTeamMembers = (team: TeamRecord) => {
         const members = [];
         
-        // Add lead first
         if (team.fields['Lead']) {
             members.push({
                 name: team.fields['Lead'] as string,
@@ -95,7 +93,6 @@ export default function AttendancePage() {
             });
         }
         
-        // Add other members
         for (let i = 1; i <= 4; i++) {
             const member = team.fields[`Member ${i}`] as string;
             if (member) {
@@ -149,9 +146,6 @@ export default function AttendancePage() {
                                 {errorHint && (
                                     <p className="text-sm text-red-200/80">Hint: {errorHint}</p>
                                 )}
-                                <p className="text-xs text-zinc-400">
-                                    See <a className="underline hover:text-white" href="/api/airtable/health" target="_blank" rel="noreferrer">/api/airtable/health</a> for diagnostics.
-                                </p>
                             </div>
                         ) : teamRecords.length > 0 ? (
                             <div className="space-y-3">

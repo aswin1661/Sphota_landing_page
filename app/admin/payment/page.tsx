@@ -21,12 +21,12 @@ interface PaymentInfo {
     attachmentName?: string;
     recordId: string;
     isVerified?: boolean;
-    // Team member details
+    
     member1?: string;
     member2?: string;
     member3?: string;
     member4?: string;
-    // IEEE Membership IDs
+    
     ieeeIdLead?: string;
     ieeeIdMember1?: string;
     ieeeIdMember2?: string;
@@ -38,8 +38,8 @@ export default function PaymentPage() {
     const [payments, setPayments] = useState<PaymentInfo[]>([]);
     const [error, setError] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
-    const [filter, setFilter] = useState<'unverified' | 'verified' | 'all'>('unverified'); // Default to unverified
-    const [searchTerm, setSearchTerm] = useState<string>(''); // Search by UPI transaction ID
+    const [filter, setFilter] = useState<'unverified' | 'verified' | 'all'>('unverified'); 
+    const [searchTerm, setSearchTerm] = useState<string>(''); 
 
     useEffect(() => {
         async function fetchData() {
@@ -75,7 +75,6 @@ export default function PaymentPage() {
     const getFilteredPayments = () => {
         let filtered = payments;
         
-        // Apply verification filter
         switch (filter) {
             case 'verified':
                 filtered = filtered.filter(payment => payment.isVerified);
@@ -84,23 +83,19 @@ export default function PaymentPage() {
                 filtered = filtered.filter(payment => !payment.isVerified);
                 break;
             default:
-                // 'all' - no verification filter
                 break;
         }
         
-        // Apply UPI transaction ID search filter (exact match)
         if (searchTerm.trim()) {
             filtered = filtered.filter(payment => {
                 const upiId = payment.upiTransactionId;
                 
-                // Handle null, undefined, or non-string values
                 if (!upiId) return false;
                 
-                // Convert to string and trim whitespace
+
                 const upiIdStr = String(upiId).trim();
                 const searchStr = searchTerm.trim();
                 
-                // Exact match comparison
                 return upiIdStr === searchStr;
             });
         }
@@ -111,7 +106,6 @@ export default function PaymentPage() {
     const getTeamMembers = (payment: PaymentInfo) => {
         const members = [];
         
-        // Add lead
         if (payment.lead) {
             const leadIeeeId = payment.ieeeIdLead || '';
             const hasLeadIeeeMembership = leadIeeeId !== '' && leadIeeeId !== 'undefined' && leadIeeeId !== 'null';
@@ -125,9 +119,7 @@ export default function PaymentPage() {
             });
         }
         
-        // Add other members - check all member fields including member 1
         const memberFields = [
-            { name: payment.member1, ieeeId: payment.ieeeIdMember1 || '', role: 'Member 1' },
             { name: payment.member2, ieeeId: payment.ieeeIdMember2 || '', role: 'Member 2' },
             { name: payment.member3, ieeeId: payment.ieeeIdMember3 || '', role: 'Member 3' },
             { name: payment.member4, ieeeId: payment.ieeeIdMember4 || '', role: 'Member 4' },
@@ -163,7 +155,6 @@ export default function PaymentPage() {
     };
 
     const handleVerificationToggle = async (recordId: string, currentStatus: boolean) => {
-        // If already verified, show alert and prevent changes
         if (currentStatus) {
             alert('Payment verification cannot be changed once verified. Contact developer if you need to modify this.');
             return;
@@ -182,7 +173,6 @@ export default function PaymentPage() {
             });
 
             if (response.ok) {
-                // Update local state
                 setPayments(prev => prev.map(payment => 
                     payment.recordId === recordId 
                         ? { ...payment, isVerified: !currentStatus }
@@ -258,7 +248,7 @@ export default function PaymentPage() {
                         </div>
                     ) : (
                         <>
-                            {/* Stats Cards */}
+                           
                             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
                                 
                                 <div 
