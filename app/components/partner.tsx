@@ -4,8 +4,18 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 
 const partners = [
-  '/images/webp/mediaone.webp',
-  '/images/webp/unibic.webp',
+  {
+    name: 'Media Partner',
+    image: '/images/webp/mediaone.webp'
+  },
+  {
+    name: 'Title Sponsor',
+    image: '/images/webp/scopeindia.png'
+  },
+  {
+    name: 'Food Partner',
+    image: '/images/webp/unibic.webp'
+  },
 ];
 
 export default function Partners() {
@@ -75,20 +85,25 @@ export default function Partners() {
           </h2>
 
           <div className="flex justify-center gap-6 flex-wrap">
-            {partners.map((logo, index) => (
+            {partners.map((partner, index) => (
               <div
                 key={index}
                 className={`${
                   isVisible ? 'animated animatedFadeInUp fadeInUp' : 'opacity-0'
-                } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition duration-200`}
+                } bg-[#0000008a] border p-7 rounded-md hover:scale-105 transition duration-200 flex flex-col`}
               >
-                <Image
-                  src={logo}
-                  alt={`Partner ${index + 1}`}
-                  width={150}
-                  height={50}
-                  className="object-contain transition duration-300"
-                />
+                <h1 className="text-white berserker mb-3 text-md font-medium text-center">
+                  {partner.name}
+                </h1>
+                <div className="flex justify-center items-center">
+                  <Image
+                    src={partner.image}
+                    alt={partner.name}
+                    width={150}
+                    height={50}
+                    className="object-contain transition duration-300"
+                  />
+                </div>
               </div>
             ))}
           </div>
