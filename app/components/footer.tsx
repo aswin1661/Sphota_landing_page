@@ -48,10 +48,13 @@ export default function Footer() {
           <a href="#spo" className="hover:text-white transition">Partners</a>
           <a href="/register" className="hover:text-white transition">Register</a>
         </div>
+        <div className="text-xs absolute mt-[17vh] text-gray-400 text-center md:text-right">
+            For Help - +91 6238067295, +91 9778328055
+          </div>
 
         {/* Copyright */}
         {year && (
-          <div className="text-xs absolute mt-[17vh] text-gray-400 text-center md:text-right">
+          <div className="text-xs absolute mt-[22vh] text-gray-400 text-center md:text-right">
             © {year} Sphota. All rights reserved.
           </div>
         )}
