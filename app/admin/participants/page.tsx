@@ -76,7 +76,6 @@ export default function ParticipantsPage() {
 
         const teamData = participants.reduce((teams: Record<string, TeamData>, participant) => {
             const fields = participant.recordFields || {};
-            console.log('Processing participant:', participant.name, 'Fields:', fields); // Debug log
             
             if (!teams[participant.teamName]) {
                 teams[participant.teamName] = {
@@ -90,30 +89,40 @@ export default function ParticipantsPage() {
 
             if (participant.isLead) {
                 teams[participant.teamName].lead = participant.name;
-                // Try different possible field names for phone
                 teams[participant.teamName].leadPhone = 
-                    [fields['Phone Number'], fields['PhoneNumber'], fields['Contact'], fields['Mobile']]
-                        .find(val => (typeof val === 'string' || typeof val === 'number')) ?? 'N/A';
-                // Try different possible field names for college
+                    typeof fields['Lead Mobile Number'] === 'string' || typeof fields['Lead Mobile Number'] === 'number'
+                        ? fields['Lead Mobile Number']
+                        : 'N/A';
                 teams[participant.teamName].leadCollege = 
-                    [fields['College Name'], fields['CollegeName'], fields['Institution'], fields['College']]
-                        .find(val => typeof val === 'string' || typeof val === 'number') ?? 'N/A';
+                    typeof fields['College Lead'] === 'string' || typeof fields['College Lead'] === 'number'
+                        ? fields['College Lead']
+                        : 'N/A';
             } else {
-                teams[participant.teamName].members.push({
-                    name: participant.name,
-                    phone: 
-                        typeof fields['Phone Number'] === 'string' || typeof fields['Phone Number'] === 'number' ? fields['Phone Number'] :
-                        typeof fields['PhoneNumber'] === 'string' || typeof fields['PhoneNumber'] === 'number' ? fields['PhoneNumber'] :
-                        typeof fields['Contact'] === 'string' || typeof fields['Contact'] === 'number' ? fields['Contact'] :
-                        typeof fields['Mobile'] === 'string' || typeof fields['Mobile'] === 'number' ? fields['Mobile'] :
-                        'N/A',
-                    college: 
-                        typeof fields['College Name'] === 'string' || typeof fields['College Name'] === 'number' ? fields['College Name'] :
-                        typeof fields['CollegeName'] === 'string' || typeof fields['CollegeName'] === 'number' ? fields['CollegeName'] :
-                        typeof fields['Institution'] === 'string' || typeof fields['Institution'] === 'number' ? fields['Institution'] :
-                        typeof fields['College'] === 'string' || typeof fields['College'] === 'number' ? fields['College'] :
-                        'N/A'
-                });
+                let memberNumber = '';
+                for (let i = 1; i <= 4; i++) {
+                    if (fields[`Member ${i}`] === participant.name) {
+                        memberNumber = String(i);
+                        break;
+                    }
+                }
+
+                if (memberNumber) {
+                    teams[participant.teamName].members.push({
+                        name: participant.name,
+                        phone: (fields[`Member ${memberNumber} Mobile Number`] !== null && 
+                               typeof fields[`Member ${memberNumber} Mobile Number`] !== 'boolean' && 
+                               (typeof fields[`Member ${memberNumber} Mobile Number`] === 'string' || 
+                                typeof fields[`Member ${memberNumber} Mobile Number`] === 'number'))
+                            ? fields[`Member ${memberNumber} Mobile Number`] as string | number
+                            : 'N/A',
+                        college: (fields[`College Member ${memberNumber}`] !== null &&
+                                typeof fields[`College Member ${memberNumber}`] !== 'boolean' &&
+                                (typeof fields[`College Member ${memberNumber}`] === 'string' ||
+                                 typeof fields[`College Member ${memberNumber}`] === 'number'))
+                            ? fields[`College Member ${memberNumber}`] as string | number
+                            : 'N/A'
+                    });
+                }
             }
 
             return teams;
