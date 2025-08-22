@@ -139,10 +139,10 @@ export default function ParticipantsPage() {
 
         // Prepare table data with better formatting
         const tableData = Object.values(teamData).map((team: TeamData) => [
-            team.teamName,
-            `Team Lead: ${team.lead}\nContact: ${team.leadPhone}\nCollege: ${team.leadCollege}`,
+            `**${team.teamName}**`,
+            `Team Lead: **${team.lead}**\nContact: ${team.leadPhone}\nCollege: ${team.leadCollege}`,
             team.members.map((m: TeamMember, index: number) => 
-                `Member ${index + 1}: ${m.name}\nContact: ${m.phone}\nCollege: ${m.college}`
+                `Member ${index + 1}: **${m.name}**\nContact: ${m.phone}\nCollege: ${m.college}`
             ).join('\n\n')
         ]);
 
@@ -161,6 +161,19 @@ export default function ParticipantsPage() {
                 0: { cellWidth: 50 },
                 1: { cellWidth: 70 },
                 2: { cellWidth: 'auto' }
+            },
+            // Add text styling options
+            didParseCell: function(data) {
+                const text = data.cell.text;
+                if (Array.isArray(text)) {
+                    data.cell.text = text.map(line => {
+                        if (typeof line === 'string' && line.includes('**')) {
+                            // Remove ** markers for bold formatting
+                            return line.replace(/\*\*/g, '');
+                        }
+                        return line;
+                    });
+                }
             },
             didDrawPage: (data) => {
                 // Add footer
