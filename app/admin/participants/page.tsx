@@ -76,6 +76,7 @@ export default function ParticipantsPage() {
 
         const teamData = participants.reduce((teams: Record<string, TeamData>, participant) => {
             const fields = participant.recordFields || {};
+            console.log('Processing participant:', participant.name, 'Fields:', fields); // Debug log
             
             if (!teams[participant.teamName]) {
                 teams[participant.teamName] = {
@@ -89,36 +90,57 @@ export default function ParticipantsPage() {
 
             if (participant.isLead) {
                 teams[participant.teamName].lead = participant.name;
-                teams[participant.teamName].leadPhone = (typeof fields['Phone'] === 'string' || typeof fields['Phone'] === 'number') ? fields['Phone'] : 'N/A';
-                teams[participant.teamName].leadCollege = (typeof fields['College'] === 'string' || typeof fields['College'] === 'number') ? fields['College'] : 'N/A';
+                // Try different possible field names for phone
+                teams[participant.teamName].leadPhone = 
+                    [fields['Phone Number'], fields['PhoneNumber'], fields['Contact'], fields['Mobile']]
+                        .find(val => (typeof val === 'string' || typeof val === 'number')) ?? 'N/A';
+                // Try different possible field names for college
+                teams[participant.teamName].leadCollege = 
+                    [fields['College Name'], fields['CollegeName'], fields['Institution'], fields['College']]
+                        .find(val => typeof val === 'string' || typeof val === 'number') ?? 'N/A';
             } else {
                 teams[participant.teamName].members.push({
                     name: participant.name,
-                    phone: (typeof fields['Phone'] === 'string' || typeof fields['Phone'] === 'number') ? fields['Phone'] : 'N/A',
-                    college: (typeof fields['College'] === 'string' || typeof fields['College'] === 'number') ? fields['College'] : 'N/A'
+                    phone: 
+                        typeof fields['Phone Number'] === 'string' || typeof fields['Phone Number'] === 'number' ? fields['Phone Number'] :
+                        typeof fields['PhoneNumber'] === 'string' || typeof fields['PhoneNumber'] === 'number' ? fields['PhoneNumber'] :
+                        typeof fields['Contact'] === 'string' || typeof fields['Contact'] === 'number' ? fields['Contact'] :
+                        typeof fields['Mobile'] === 'string' || typeof fields['Mobile'] === 'number' ? fields['Mobile'] :
+                        'N/A',
+                    college: 
+                        typeof fields['College Name'] === 'string' || typeof fields['College Name'] === 'number' ? fields['College Name'] :
+                        typeof fields['CollegeName'] === 'string' || typeof fields['CollegeName'] === 'number' ? fields['CollegeName'] :
+                        typeof fields['Institution'] === 'string' || typeof fields['Institution'] === 'number' ? fields['Institution'] :
+                        typeof fields['College'] === 'string' || typeof fields['College'] === 'number' ? fields['College'] :
+                        'N/A'
                 });
             }
 
             return teams;
         }, {});
 
-        // Prepare table data
+        // Prepare table data with better formatting
         const tableData = Object.values(teamData).map((team: TeamData) => [
             team.teamName,
-            `Lead: ${team.lead}\nPhone: ${team.leadPhone}\nCollege: ${team.leadCollege}`,
-            team.members.map((m: TeamMember) => 
-                `${m.name}\nPhone: ${m.phone}\nCollege: ${m.college}`
+            `Team Lead: ${team.lead}\nContact: ${team.leadPhone}\nCollege: ${team.leadCollege}`,
+            team.members.map((m: TeamMember, index: number) => 
+                `Member ${index + 1}: ${m.name}\nContact: ${m.phone}\nCollege: ${m.college}`
             ).join('\n\n')
         ]);
 
-        // Generate table
+        // Generate table with adjusted column widths
         autoTable(doc, {
-            head: [['Team Name', 'Team Lead', 'Members']],
+            head: [['Team Name', 'Team Lead Details', 'Team Members']],
             body: tableData,
             startY: 30,
-            styles: { fontSize: 8, cellPadding: 2 },
+            styles: { 
+                fontSize: 8, 
+                cellPadding: 3,
+                lineColor: [200, 200, 200],
+                lineWidth: 0.1,
+            },
             columnStyles: {
-                0: { cellWidth: 40 },
+                0: { cellWidth: 50 },
                 1: { cellWidth: 70 },
                 2: { cellWidth: 'auto' }
             },
