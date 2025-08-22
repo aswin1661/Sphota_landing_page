@@ -1,5 +1,7 @@
 "use client";
 
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 import Link from "next/link";
 import { useState, useEffect } from 'react';
 import LogoutButton from "@/app/admin/LogoutButton";
@@ -48,16 +50,109 @@ export default function ParticipantsPage() {
         }
     };
 
+    const generatePDF = () => {
+        const doc = new jsPDF();
+        
+        // Add title and date
+        doc.setFontSize(16);
+        doc.text('Sphota - Teams & Participants Report', 14, 15);
+        doc.setFontSize(10);
+        doc.text(`Generated on ${new Date().toLocaleDateString()}`, 14, 22);
+
+        // Group participants by team
+        interface TeamMember {
+            name: string;
+            phone: string | number;
+            college: string | number;
+        }
+
+        interface TeamData {
+            teamName: string;
+            lead: string;
+            leadPhone: string | number;
+            leadCollege: string | number;
+            members: TeamMember[];
+        }
+
+        const teamData = participants.reduce((teams: Record<string, TeamData>, participant) => {
+            const fields = participant.recordFields || {};
+            
+            if (!teams[participant.teamName]) {
+                teams[participant.teamName] = {
+                    teamName: participant.teamName,
+                    lead: '',
+                    leadPhone: '',
+                    leadCollege: '',
+                    members: []
+                };
+            }
+
+            if (participant.isLead) {
+                teams[participant.teamName].lead = participant.name;
+                teams[participant.teamName].leadPhone = (typeof fields['Phone'] === 'string' || typeof fields['Phone'] === 'number') ? fields['Phone'] : 'N/A';
+                teams[participant.teamName].leadCollege = (typeof fields['College'] === 'string' || typeof fields['College'] === 'number') ? fields['College'] : 'N/A';
+            } else {
+                teams[participant.teamName].members.push({
+                    name: participant.name,
+                    phone: (typeof fields['Phone'] === 'string' || typeof fields['Phone'] === 'number') ? fields['Phone'] : 'N/A',
+                    college: (typeof fields['College'] === 'string' || typeof fields['College'] === 'number') ? fields['College'] : 'N/A'
+                });
+            }
+
+            return teams;
+        }, {});
+
+        // Prepare table data
+        const tableData = Object.values(teamData).map((team: TeamData) => [
+            team.teamName,
+            `Lead: ${team.lead}\nPhone: ${team.leadPhone}\nCollege: ${team.leadCollege}`,
+            team.members.map((m: TeamMember) => 
+                `${m.name}\nPhone: ${m.phone}\nCollege: ${m.college}`
+            ).join('\n\n')
+        ]);
+
+        // Generate table
+        autoTable(doc, {
+            head: [['Team Name', 'Team Lead', 'Members']],
+            body: tableData,
+            startY: 30,
+            styles: { fontSize: 8, cellPadding: 2 },
+            columnStyles: {
+                0: { cellWidth: 40 },
+                1: { cellWidth: 70 },
+                2: { cellWidth: 'auto' }
+            },
+            didDrawPage: (data) => {
+                // Add footer
+                doc.setFontSize(8);
+                doc.text(
+                    'Sphota Registration Report',
+                    data.settings.margin.left,
+                    doc.internal.pageSize.height - 10
+                );
+            }
+        });
+
+        // Save the PDF
+        doc.save('sphota-teams-report.pdf');
+    };
+
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
             <div className="mx-auto max-w-6xl px-8 py-14">
                 <header className="flex items-center justify-between mb-10">
                     <div>
                         <h1 className="text-4xl font-extrabold tracking-tight text-white">Participants</h1>
-                        <p className="mt-1 text-base text-zinc-300"></p>
+                        <p className="mt-1 text-base text-zinc-300">View and export participant details</p>
                     </div>
                     
                     <div className="flex items-center gap-4">
+                        <button
+                            onClick={generatePDF}
+                            className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
+                        >
+                            Download Report
+                        </button>
                         <Link 
                             href="/admin" 
                             className="text-base text-zinc-300 hover:text-white underline-offset-4 hover:underline"
