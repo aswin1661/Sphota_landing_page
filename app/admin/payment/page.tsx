@@ -249,8 +249,8 @@ export default function PaymentPage() {
                     ) : (
                         <>
                            
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
-                                
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+                                {/* Verified Payments Card */}
                                 <div 
                                     className={`rounded-lg border border-white/10 p-3 cursor-pointer transition-all hover:scale-105 ${
                                         filter === 'verified' ? 'bg-blue-500/20 border-blue-500/40' : 'bg-blue-500/10 hover:bg-blue-500/15'
@@ -260,6 +260,7 @@ export default function PaymentPage() {
                                     <div className="text-xl font-bold text-blue-400">{stats.verifiedCount}</div>
                                     <div className="text-xs text-zinc-400">Verified Payments</div>
                                 </div>
+                                {/* Unverified Payments Card */}
                                 <div 
                                     className={`rounded-lg border border-white/10 p-3 cursor-pointer transition-all hover:scale-105 ${
                                         filter === 'unverified' ? 'bg-orange-500/20 border-orange-500/40' : 'bg-orange-500/10 hover:bg-orange-500/15'
@@ -269,6 +270,7 @@ export default function PaymentPage() {
                                     <div className="text-xl font-bold text-orange-400">{stats.unverifiedCount}</div>
                                     <div className="text-xs text-zinc-400">Unverified Payments</div>
                                 </div>
+                                {/* All Payments Card */}
                                 <div 
                                     className={`rounded-lg border border-white/10 p-3 cursor-pointer transition-all hover:scale-105 ${
                                         filter === 'all' ? 'bg-purple-500/20 border-purple-500/40' : 'bg-purple-500/10 hover:bg-purple-500/15'
@@ -277,6 +279,16 @@ export default function PaymentPage() {
                                 >
                                     <div className="text-xl font-bold text-purple-400">{stats.total}</div>
                                     <div className="text-xs text-zinc-400">All Payments</div>
+                                </div>
+                                {/* Total Amount Received Card */}
+                                <div className="rounded-lg border border-white/10 p-3 bg-green-500/10 hover:bg-green-500/15 transition-all hover:scale-105 flex flex-col justify-center items-center">
+                                    <div className="text-xl font-bold text-green-400">
+                                        ₹{payments.reduce((sum, payment) => {
+                                            const teamMembers = getTeamMembers(payment);
+                                            return sum + teamMembers.reduce((total, member) => total + member.paymentAmount, 0);
+                                        }, 0)}
+                                    </div>
+                                    <div className="text-xs text-zinc-400 text-center">Total Amount Received</div>
                                 </div>
                             </div>
 
@@ -299,7 +311,7 @@ export default function PaymentPage() {
                                                 <button 
                                                     onClick={() => setFilter('unverified')}
                                                     className="text-sm text-orange-400 hover:text-orange-300 underline"
-                                                >
+                                                > 
                                                     Show Unverified
                                                 </button>
                                             )}
