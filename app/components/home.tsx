@@ -1,5 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -8,11 +7,6 @@ import dynamic from "next/dynamic";
 const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
 
 export default function Home() {
-  const router = useRouter();
-
-  const handleRegisterClick = () => {
-    router.push('/register');
-  };
 
   return (
     <div className="relative w-full min-h-screen   overflow-x-hidden">
