@@ -106,6 +106,15 @@ export default function ParticipantsPage() {
                     }
                 }
 
+                const getCollegeFieldName = (memberNumber: string) => {
+                    switch(memberNumber) {
+                        case '2': return 'College Memeber 2'; // Note: keeping the typo as it matches Airtable
+                        case '3': return 'Member 3 College';
+                        case '4': return 'Member 4 College';
+                        default: return `College Member ${memberNumber}`;
+                    }
+                };
+
                 if (memberNumber) {
                     teams[participant.teamName].members.push({
                         name: participant.name,
@@ -115,11 +124,11 @@ export default function ParticipantsPage() {
                                 typeof fields[`Member ${memberNumber} Mobile Number`] === 'number'))
                             ? fields[`Member ${memberNumber} Mobile Number`] as string | number
                             : 'N/A',
-                        college: (fields[`College Member ${memberNumber}`] !== null &&
-                                typeof fields[`College Member ${memberNumber}`] !== 'boolean' &&
-                                (typeof fields[`College Member ${memberNumber}`] === 'string' ||
-                                 typeof fields[`College Member ${memberNumber}`] === 'number'))
-                            ? fields[`College Member ${memberNumber}`] as string | number
+                        college: (fields[getCollegeFieldName(memberNumber)] !== null &&
+                                typeof fields[getCollegeFieldName(memberNumber)] !== 'boolean' &&
+                                (typeof fields[getCollegeFieldName(memberNumber)] === 'string' ||
+                                 typeof fields[getCollegeFieldName(memberNumber)] === 'number'))
+                            ? fields[getCollegeFieldName(memberNumber)] as string | number
                             : 'N/A'
                     });
                 }
