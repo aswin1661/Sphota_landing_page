@@ -25,6 +25,7 @@ export default function AttendancePage() {
     const [errorHint, setErrorHint] = useState<string | undefined>(undefined);
     const [isLoading, setIsLoading] = useState(true);
     const [updatingId, setUpdatingId] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         async function fetchData() {
@@ -106,6 +107,10 @@ export default function AttendancePage() {
         return members;
     };
 
+    const filteredTeamRecords = teamRecords.filter(team =>
+        team.teamName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="min-h-[100svh] bg-gradient-to-br from-slate-950 via-slate-900 to-zinc-900 text-white">
             <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-14">
@@ -126,6 +131,21 @@ export default function AttendancePage() {
                     </div>
                 </header>
 
+                <div className="mb-6">
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Search teams..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                        />
+                        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500">
+                            {searchQuery ? `${filteredTeamRecords.length} results` : null}
+                        </div>
+                    </div>
+                </div>
+
                 <main>
 
                     <div className="rounded-xl border border-white/10 bg-white/5 p-4 sm:p-6 lg:p-8 backdrop-blur">
@@ -134,7 +154,7 @@ export default function AttendancePage() {
                                 Team Attendance
                             </h2>
                             <p className="text-sm text-zinc-400">
-                                Total Teams: {teamRecords.length}
+                                Total Teams: {filteredTeamRecords.length}
                             </p>
                         </div>
                         
@@ -149,7 +169,7 @@ export default function AttendancePage() {
                             </div>
                         ) : teamRecords.length > 0 ? (
                             <div className="space-y-3">
-                                {teamRecords.map((team, index) => {
+                                {filteredTeamRecords.map((team, index) => {
                                     const attendance = team.fields['Attendance'] as string || 'Not Set';
                                     const isVerified = team.fields['Verified'] === 'Verified';
                                     const isUpdating = updatingId === team.recordId;
