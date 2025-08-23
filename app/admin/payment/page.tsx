@@ -12,6 +12,8 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 interface PaymentInfo {
     teamName: string;
@@ -186,6 +188,107 @@ export default function PaymentPage() {
         }
     };
 
+    function generatePaymentsPDF() {
+        const doc = new jsPDF();
+
+        // Helper: Group members by team and IEEE status
+        interface TeamMemberEntry {
+            team: string;
+            name: string;
+            role: string;
+            ieeeId: string;
+            amount: number;
+        }
+        const ieeeTeams: Record<string, TeamMemberEntry[]> = {};
+        const nonIeeeTeams: Record<string, TeamMemberEntry[]> = {};
+
+        payments.forEach(payment => {
+            const teamName = payment.teamName || "Unknown Team";
+            const members = getTeamMembers(payment);
+
+            members.forEach(member => {
+                const entry = {
+                    team: teamName,
+                    name: member.name,
+                    role: member.role,
+                    ieeeId: member.ieeeId,
+                    amount: member.paymentAmount,
+                };
+                if (member.hasIeeeMembership) {
+                    if (!ieeeTeams[teamName]) ieeeTeams[teamName] = [];
+                    ieeeTeams[teamName].push(entry);
+                } else {
+                    if (!nonIeeeTeams[teamName]) nonIeeeTeams[teamName] = [];
+                    nonIeeeTeams[teamName].push(entry);
+                }
+            });
+        });
+
+        // Page 1: IEEE Members
+        doc.setFontSize(16);
+        doc.text("IEEE Members Payment List", 14, 15);
+        doc.setFontSize(10);
+        doc.text(`Generated on ${new Date().toLocaleString()}`, 14, 22);
+
+        let lastY = 30;
+        let ieeeTotal = 0;
+        type JsPDFWithAutoTable = jsPDF & { lastAutoTable?: { finalY: number } };
+        const docWithAutoTable = doc as JsPDFWithAutoTable;
+        Object.entries(ieeeTeams).forEach(([team, members]) => {
+            autoTable(doc, {
+                head: [[`Team: ${team}`, "Name", "Role", "IEEE ID", "Amount"]],
+                body: members.map(m => [
+                    "", m.name, m.role, m.ieeeId, `₹${Number(m.amount)}/-`
+                ]),
+                startY: lastY,
+                theme: "grid",
+                styles: { fontSize: 9 }
+            });
+            ieeeTotal += members.reduce((sum, m) => sum + m.amount, 0);
+            lastY = docWithAutoTable.lastAutoTable ? docWithAutoTable.lastAutoTable.finalY + 10 : lastY + 40;
+        });
+
+        doc.setFontSize(12);
+        doc.text(`Total Amount (IEEE): ₹${Number(ieeeTotal)}/-`, 14, lastY + 6);
+
+        // Page 2: Non-IEEE Members
+        doc.addPage();
+        doc.setFontSize(16);
+        doc.text("Non-IEEE Members Payment List", 14, 15);
+        doc.setFontSize(10);
+
+        let lastY2 = 30;
+        let nonIeeeTotal = 0;
+        Object.entries(nonIeeeTeams).forEach(([team, members]) => {
+            autoTable(doc, {
+                head: [[`Team: ${team}`, "Name", "Role", "IEEE ID", "Amount"]],
+                body: members.map(m => [
+                    "", m.name, m.role, m.ieeeId, `₹${Number(m.amount)}/-`
+                ]),
+                startY: lastY2,
+                theme: "grid",
+                styles: { fontSize: 9 }
+            });
+            nonIeeeTotal += members.reduce((sum, m) => sum + m.amount, 0);
+            const docWithAutoTable2 = doc as jsPDF & { lastAutoTable?: { finalY: number } };
+            lastY2 = docWithAutoTable2.lastAutoTable ? docWithAutoTable2.lastAutoTable.finalY + 10 : lastY2 + 40;
+        });
+
+        doc.setFontSize(12);
+        doc.text(`Total Amount (Non-IEEE): ₹${Number(nonIeeeTotal)}/-`, 14, lastY2 + 6);
+
+        // Final page: Combined totals
+        doc.addPage();
+        doc.setFontSize(16);
+        doc.text("Summary of Total Payments", 14, 20);
+        doc.setFontSize(12);
+        doc.text(`Total IEEE Amount: ₹${Number(ieeeTotal)}/-`, 14, 40);
+        doc.text(`Total Non-IEEE Amount: ₹${Number(nonIeeeTotal)}/-`, 14, 55);
+        doc.text(`Grand Total: ₹${Number(ieeeTotal + nonIeeeTotal)}/-`, 14, 70);
+
+        doc.save("payments_by_ieee_status.pdf");
+    }
+
     const stats = getPaymentStats();
     const filteredPayments = getFilteredPayments();
 
@@ -323,6 +426,12 @@ export default function PaymentPage() {
                                                     Show All
                                                 </button>
                                             )}
+                                            <Button
+                                                onClick={generatePaymentsPDF}
+                                                className="mb-6 bg-blue-600 text-white hover:bg-blue-700"
+                                            >
+                                                Download Payments PDF
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>
