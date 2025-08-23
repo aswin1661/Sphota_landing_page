@@ -17,7 +17,7 @@ export default function TimerPage() {
     function getTargetDate() {
         const now = new Date();
         const target = new Date(now);
-        target.setDate(now.getDate() + 1);
+        target.setDate(now.getDate());
         target.setHours(12, 15, 0, 0);
         return target;
     }
