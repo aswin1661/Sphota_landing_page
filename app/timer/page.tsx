@@ -40,6 +40,11 @@ export default function TimerPage() {
         '/images/scopeindia.png',
         '/images/unibic.png',
         '/images/webp/mediaone.webp',
+        '/images/Dnet.jpg',
+            '/images/Gtech.jpg',
+            '/images/Stack up.png',
+            '/images/bestrong.png',
+            '/images/asswathy.png',
         // Add more sponsor image paths
     ];
 
@@ -121,7 +126,7 @@ export default function TimerPage() {
                     <div className="flex animate-scroll">
                         {/* First set of sponsors */}
                         {sponsors.map((sponsor, index) => (
-                            <div key={`first-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-8">
+                            <div key={`first-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-16">
                                 <Image
                                     src={sponsor}
                                     alt={`Sponsor ${index + 1}`}
@@ -134,7 +139,7 @@ export default function TimerPage() {
                         ))}
                         {/* Duplicate set for seamless loop */}
                         {sponsors.map((sponsor, index) => (
-                            <div key={`second-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-8">
+                            <div key={`second-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-16">
                                 <Image
                                     src={sponsor}
                                     alt={`Sponsor ${index + 1}`}
@@ -146,7 +151,7 @@ export default function TimerPage() {
                         ))}
                         {/* Third set for extra seamlessness */}
                         {sponsors.map((sponsor, index) => (
-                            <div key={`third-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-8">
+                            <div key={`third-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-16">
                                 <Image
                                     src={sponsor}
                                     alt={`Sponsor ${index + 1}`}
