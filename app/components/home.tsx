@@ -2,9 +2,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
-
-const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
 
 export default function Home() {
 
@@ -92,7 +89,7 @@ export default function Home() {
 
         {/* Countdown */}
         <div className="absolute mt-[60vh] animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg ">
-          <Countdown targetDate="2025-08-23T00:00:00" />
+          <h2>Its happening.......</h2>
         </div>
       </section>
     </div>
