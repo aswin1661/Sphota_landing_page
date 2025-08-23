@@ -9,7 +9,7 @@ export default function TimerPage() {
     const [timeLeft, setTimeLeft] = useState({
         hours: 23,
         minutes: 25,
-        seconds: 0
+        seconds: 1,
     });
     const timerRef = useRef<NodeJS.Timeout | null>(null);
 
