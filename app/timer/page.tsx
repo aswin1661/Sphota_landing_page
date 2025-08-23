@@ -7,11 +7,20 @@ export default function TimerPage() {
     const [mounted, setMounted] = useState(false);
     const [timerActive, setTimerActive] = useState(false);
     const [timeLeft, setTimeLeft] = useState({
-        hours: 23,
-        minutes: 20,
-        seconds: 1,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
     });
     const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Calculate tomorrow's 12:15 PM
+    function getTargetDate() {
+        const now = new Date();
+        const target = new Date(now);
+        target.setDate(now.getDate() + 1);
+        target.setHours(12, 15, 0, 0);
+        return target;
+    }
 
     useEffect(() => {
         setMounted(true);
@@ -23,25 +32,20 @@ export default function TimerPage() {
             return;
         }
         timerRef.current = setInterval(() => {
-            setTimeLeft(prev => {
-                const { hours, minutes, seconds } = prev;
-                if (hours === 0 && minutes === 0 && seconds === 0) {
-                    if (timerRef.current) clearInterval(timerRef.current);
-                    playNotification();
-                    setTimerActive(false);
-                    return prev;
-                }
-                if (seconds === 0) {
-                    if (minutes === 0) {
-                        if (hours === 0) {
-                            return { hours: 0, minutes: 0, seconds: 0 };
-                        }
-                        return { hours: hours - 1, minutes: 59, seconds: 59 };
-                    }
-                    return { hours, minutes: minutes - 1, seconds: 59 };
-                }
-                return { hours, minutes, seconds: seconds - 1 };
-            });
+            const now = new Date();
+            const target = getTargetDate();
+            const diff = Math.max(0, Math.floor((target.getTime() - now.getTime()) / 1000));
+            if (diff <= 0) {
+                if (timerRef.current) clearInterval(timerRef.current);
+                playNotification();
+                setTimerActive(false);
+                setTimeLeft({ hours: 0, minutes: 0, seconds: 0 });
+                return;
+            }
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = diff % 60;
+            setTimeLeft({ hours, minutes, seconds });
         }, 1000);
         return () => {
             if (timerRef.current) clearInterval(timerRef.current);
@@ -49,21 +53,18 @@ export default function TimerPage() {
     }, [timerActive]);
 
     function startTimer() {
-        setTimeLeft({ hours: 24, minutes: 0, seconds: 0 });
         setTimerActive(true);
     }
 
     function playNotification() {
-        // Play a system notification sound
         const audio = new Audio('/notification.mp3');
         audio.play();
-        // Optionally show a browser notification
         if (window.Notification && Notification.permission === "granted") {
-            new Notification("Timer Ended!", { body: "The 24-hour timer has finished." });
+            new Notification("Timer Ended!", { body: "Countdown to 12:15 PM tomorrow finished." });
         } else if (window.Notification && Notification.permission !== "denied") {
             Notification.requestPermission().then(permission => {
                 if (permission === "granted") {
-                    new Notification("Timer Ended!", { body: "The 24-hour timer has finished." });
+                    new Notification("Timer Ended!", { body: "Countdown to 12:15 PM tomorrow finished." });
                 }
             });
         }
@@ -89,7 +90,7 @@ export default function TimerPage() {
                     </h1>
                     <div className="flex justify-center mt-[15vh] items-center space-x-8 mb-16">
                         <div className="text-center">
-                            <div className="text-7xl font-bold text-white mb-2">24</div>
+                            <div className="text-7xl font-bold text-white mb-2">00</div>
                             <div className="text-xl text-zinc-400">Hours</div>
                         </div>
                         <div className="text-7xl font-bold text-white">:</div>
@@ -145,7 +146,7 @@ export default function TimerPage() {
                         disabled={timerActive}
                         className="px-4 py-2 bg-blue-600 text-white rounded-lg text-md font-bold hover:bg-blue-700 transition-all disabled:opacity-50"
                     >
-                        {timerActive ? "Running..." : "Start 24 Hour Timer"}
+                        {timerActive ? "Running..." : "Start Countdown"}
                     </button>
                 </div>
 
@@ -153,7 +154,6 @@ export default function TimerPage() {
                 <div className="px-4 max-w-full mt-[10vh] mx-auto overflow-hidden">
                     <div className="sponsor-marquee">
                         <div className="sponsor-track">
-                            {/* First set of sponsors */}
                             {sponsors.map((sponsor, index) => (
                                 <div key={`first-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-8">
                                     <Image
@@ -166,7 +166,6 @@ export default function TimerPage() {
                                     />
                                 </div>
                             ))}
-                            {/* Duplicate set for seamless loop */}
                             {sponsors.map((sponsor, index) => (
                                 <div key={`second-${index}`} className="flex-shrink-0 w-40 h-32 sm:h-40 flex items-center justify-center relative mr-8">
                                     <Image
