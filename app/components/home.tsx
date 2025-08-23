@@ -88,8 +88,8 @@ export default function Home() {
 
 
         {/* Countdown */}
-        <div className="absolute mt-[60vh] animated animatedFadeInUp fadeInUp text-white text-center px-6 py-2 rounded-lg ">
-          <h2>Its happening.......</h2>
+        <div className="absolute mt-[60vh] animated animatedFadeInUp fadeInUp text-white opacity-30 text-center z-999 px-6 py-2 rounded-lg ">
+          <h2 className="animate-pulse" >Its happening right now.......</h2>
         </div>
       </section>
     </div>
